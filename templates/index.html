@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Index{% endblock %}
+{% block content %}
+
+<div id="ind">
+
+    <p><input type="button" value="Hide this" id="ind_set" />
+
+</div>
+
+<script>
+
+    $("#ind_set").click(function(){
+        $("#ind").hide();
+    });
+
+    // $("#reg_log").click(function(){
+    //     var role = "";
+    //     if ($("#master").prop("checked")) { role = "master"; }
+    //     else { role = "client"; }
+    //     $.ajax({
+    //         method: "POST",
+    //         url: "/register_check",
+    //         data: {
+    //             user : $("#usrreg").val(),
+    //             password : $("#psreg").val(),
+    //             role : role
+    //         }
+    //     })
+    //     .done(function(data) {
+    //         if (data.status == "OK"){
+    //             $('#successAlert_reg').text("New user is existed!").show();
+    //             $('#errorAlert_reg').hide();
+    //             $(this).delay(1000).queue(function() {
+    //                 $("#register").hide();
+    //                 $("#login").show();
+    //                 $('#successAlert_reg').hide();
+    //                 $(this).dequeue();
+    //             });
+    //         }
+    //         else{
+    //             if (data.status == "No user"){ $('#errorAlert_reg').text("Incorrect Username!").show(); }
+    //             else if (data.status == "No password"){ $('#errorAlert_reg').text("Incorrect Password!").show(); }
+    //             else { $('#errorAlert_reg').text("Such user already exists!").show(); }
+    //             $('#successAlert_reg').hide();
+    //         }
+    //     });
+    // });
+
+</script>
+
+{% endblock %}
