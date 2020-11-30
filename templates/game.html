@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Index{% endblock %}
+{% block content %}
+
+<div style="width: 900px; height: 500px; border: 1px solid #ccc;" id="targetDiv">
+	<button id="targetImg" style="border: none;"> <img src="https://sun1-19.userapi.com/impf/c841428/v841428606/6b581/jUyYEOmKQJM.jpg?size=1280x854&quality=96&proxy=1&sign=47912c998b546d5aa171de1da92f5ce0" width="100px" height="100px" /> </button>
+</div>
+
+<script>
+	
+	function randomInteger(min, max) {
+	    var rand = min - 0.5 + Math.random() * (max - min + 1)
+	    rand = Math.round(rand);
+	    return rand;
+  	}
+ 
+	function kickImg() {
+		var w = document.getElementById("targetDiv").offsetWidth;
+		var h = document.getElementById("targetDiv").offsetHeight;
+
+		var dx = randomInteger(0, h-100);
+		var dy = randomInteger(0, w-100);
+
+		document.getElementById('targetImg').style.position = 'relative';
+		document.getElementById('targetImg').style.display = 'block';
+		document.getElementById('targetImg').style.top = dx+'px';
+		document.getElementById('targetImg').style.left = dy+'px';
+
+		console.log("dx = "+dx+", dy = " +dy);
+	}
+	 
+	document.getElementById('targetImg').addEventListener('click', kickImg);
+
+</script>
+
+{% endblock %}

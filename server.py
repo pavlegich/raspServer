@@ -76,6 +76,11 @@ def sensor():
 			'y' : round(random.uniform(30.0, 31.0), 4), \
 			'z' : round(random.uniform(1.0, 20.0), 2), 'time' : round(time.time())})
 
+
+@app.route('/game')
+def game():
+    return render_template("game.html")
+
 # @app.route('/logout', methods=['GET', 'POST'])
 # @auth.login_required
 # def logout():
