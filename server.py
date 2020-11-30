@@ -1,11 +1,8 @@
-from flask import Flask, render_template, redirect, url_for, request, session, flash, jsonify, Response
+from flask import Flask, render_template, redirect, url_for, request, session, flash, jsonify
 from flask_httpauth import HTTPDigestAuth
 from werkzeug.security import generate_password_hash, check_password_hash
-import numpy as np
-import cv2
 import time
 import random
-from camera import Camera
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hello'
@@ -23,16 +20,9 @@ endpoint = {
 
 # 'user' : auth.username()
 
-def gen(camera):
-    while True:
-        frame = camera.get_frame()
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-
 @app.route('/video_feed')
 def video_feed():
-    return Response(gen(Camera()),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
+    return render_template("video_feed.html")
 
 @auth.get_password
 def get_pw(username):
