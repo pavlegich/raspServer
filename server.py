@@ -1,6 +1,8 @@
 from flask import Flask, render_template, redirect, url_for, request, session, flash, jsonify, Response
 from flask_httpauth import HTTPDigestAuth
 from werkzeug.security import generate_password_hash, check_password_hash
+import numpy as np
+import cv2
 import time
 import random
 from camera import Camera
