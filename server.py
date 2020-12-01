@@ -25,9 +25,12 @@ endpoint = {
 
 # 'user' : auth.username()
 
+last_frame = None
+
 def gen(camera):
 	while True:
 		frame = camera.get_frame()
+		last_frame = frame
 		yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 @app.route('/video_feed')
@@ -36,7 +39,7 @@ def video_feed():
 
 @app.route('/latest_image')
 def latest_image():
-	return Camera().get_frame()
+	yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + last_frame + b'\r\n')
 
 
 @auth.get_password
@@ -85,7 +88,7 @@ def sensor():
 	stype = request.args.get('type')
 	if stype == 'camera':
 		return jsonify({'type' : stype, 'image' : 'http://localhost:5000/latest_image', \
-		 'time' : round(time.time())})
+		 'time' : Camera().last_access })
 	elif stype == 'gps':
 		return jsonify({'type' : stype, 'x' : round(random.uniform(59.0, 60.0), 4), \
 			'y' : round(random.uniform(30.0, 31.0), 4), \
