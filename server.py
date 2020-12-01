@@ -38,10 +38,18 @@ def gen(camera):
 def video_feed():
 	return Response(gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
+@app.route('/image')
+def image():
+	return Response(gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
+
 @app.route('/latest_image')
 def latest_image():
-	return Response(gen_img(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
-
+	return """
+	<div>
+    <img src="{{ url_for('image') }}" 
+    style="width: 320px; height: 240px;">
+	</div>
+	"""
 
 @auth.get_password
 def get_pw(username):
