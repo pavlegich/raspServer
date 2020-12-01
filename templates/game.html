@@ -3,14 +3,14 @@
 {% block content %}
 
 <div style="width: 900px; height: 500px; border: 1px solid #ccc;" id="targetDiv">
-	<button id="targetImg" style="border: none;"> 
+	<button id="targetImg1" style="border: none;"> 
+		<img src="https://sun1-19.userapi.com/impf/c841428/v841428606/6b581/jUyYEOmKQJM.jpg?size=1280x854&quality=96&proxy=1&sign=47912c998b546d5aa171de1da92f5ce0" width="70px" height="70px" /> 
+	</button>
 
-		<!-- <img src="https://sun1-19.userapi.com/impf/c841428/v841428606/6b581/jUyYEOmKQJM.jpg?size=1280x854&quality=96&proxy=1&sign=47912c998b546d5aa171de1da92f5ce0" width="100px" height="100px" />  -->
-
-		<img src="https://sun9-17.userapi.com/impg/zYlgYTZACDk41ImF04g9WgFHg2XMurwlsq0WAw/jkCNdNMAaNw.jpg?size=720x1280&quality=96&proxy=1&sign=31bd42e02b8cd857a1d4e3598c350ef0" width="50px" height="50px" /> 
+	<button id="targetImg2" style="border: none;"> 
+		<img src="https://sun9-17.userapi.com/impg/zYlgYTZACDk41ImF04g9WgFHg2XMurwlsq0WAw/jkCNdNMAaNw.jpg?size=720x1280&quality=96&proxy=1&sign=31bd42e02b8cd857a1d4e3598c350ef0" width="70px" height="70px" /> 
 
 		<!-- <img src="https://sun9-31.userapi.com/impg/SVMF21fDwOwoZyjDI1bnPBjssdYH3BR3OfrhdA/FFB_omdRXH8.jpg?size=300x206&quality=96&proxy=1&sign=d7f6e81da1875e8ec4bdbf21906fb2b8" width="100px" height="100px" />  -->
-
 	</button>
 </div>
 
@@ -22,22 +22,34 @@
 	    return rand;
   	}
  
-	function kickImg() {
+	function kickImg1() {
+		var w = document.getElementById("targetDiv").offsetWidth;
+		var h = document.getElementById("targetDiv").offsetHeight;
+
+		var dx = randomInteger(0, h-300);
+		var dy = randomInteger(0, w-300);
+
+		document.getElementById('targetImg1').style.position = 'relative';
+		document.getElementById('targetImg1').style.display = 'block';
+		document.getElementById('targetImg1').style.top = dx+'px';
+		document.getElementById('targetImg1').style.left = dy+'px';
+	}
+
+	function kickImg2() {
 		var w = document.getElementById("targetDiv").offsetWidth;
 		var h = document.getElementById("targetDiv").offsetHeight;
 
 		var dx = randomInteger(0, h-100);
 		var dy = randomInteger(0, w-100);
 
-		document.getElementById('targetImg').style.position = 'relative';
-		document.getElementById('targetImg').style.display = 'block';
-		document.getElementById('targetImg').style.top = dx+'px';
-		document.getElementById('targetImg').style.left = dy+'px';
-
-		console.log("dx = "+dx+", dy = " +dy);
+		document.getElementById('targetImg2').style.position = 'relative';
+		document.getElementById('targetImg2').style.display = 'block';
+		document.getElementById('targetImg2').style.top = dx+'px';
+		document.getElementById('targetImg2').style.left = dy+'px';
 	}
 	 
-	document.getElementById('targetImg').addEventListener('click', kickImg);
+	document.getElementById('targetImg1').addEventListener('click', kickImg1);
+	document.getElementById('targetImg2').addEventListener('click', kickImg2);
 
 </script>
 
