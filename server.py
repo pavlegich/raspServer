@@ -4,8 +4,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import time
 import random
 from camera_pi import Camera
+import numpy as np
+import cv2
 
-
+faceCascade = cv2.CascadeClassifier('Cascades/haarcascade_frontalface_default.xml')
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hello'
@@ -26,6 +28,17 @@ endpoint = {
 def gen(camera):
 	while True:
 		frame = camera.get_frame()
+		gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+		faces = faceCascade.detectMultiScale(
+			gray,
+			scaleFactor=1.2,
+			minNeighbors=5,
+			minSize=(20, 20)
+		)
+		for (x,y,w,h) in faces:
+			cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
+			roi_gray = gray[y:y+h, x:x+w]
+			roi_color = frame[y:y+h, x:x+w]
 		yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 @app.route('/video_feed')
