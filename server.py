@@ -29,8 +29,7 @@ def gen(camera):
 
 @app.route('/video_feed')
 def video_feed():
-	def video_feed():
-		return Response(gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
+	return Response(gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @auth.get_password
 def get_pw(username):
