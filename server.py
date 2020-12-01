@@ -39,7 +39,7 @@ def video_feed():
 
 @app.route('/latest_image')
 def latest_image():
-	yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + last_frame + b'\r\n')
+	return last_frame
 
 
 @auth.get_password
