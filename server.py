@@ -32,6 +32,15 @@ def gen(camera):
 def video_feed():
 	return Response(gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
+@app.route('/camera')
+def camera():
+	timeNow = time.asctime(time.localtime(time.time()))
+	templateData = {
+		'time': timeNow
+	}
+	return render_template('video_feed.html', **templateData)
+
+
 @auth.get_password
 def get_pw(username):
     if username in users:
