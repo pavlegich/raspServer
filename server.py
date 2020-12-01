@@ -9,6 +9,8 @@ import cv2
 
 faceCascade = cv2.CascadeClassifier('Cascades/haarcascade_frontalface_default.xml')
 
+ip_address = flask.request.remote_addr
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hello'
 auth = HTTPDigestAuth()
@@ -91,7 +93,7 @@ def setendpoint():
 def sensor():
 	stype = request.args.get('type')
 	if stype == 'camera':
-		return jsonify({'type' : stype, 'image' : 'http://localhost:5000/latest_image', \
+		return jsonify({'type' : stype, 'image' : 'http://' + ip_address + ':5000/latest_image', \
 		 'time' : Camera().last_access })
 	elif stype == 'gps':
 		return jsonify({'type' : stype, 'x' : round(random.uniform(59.0, 60.0), 4), \
