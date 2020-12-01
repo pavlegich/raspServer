@@ -34,6 +34,11 @@ def gen(camera):
 def video_feed():
 	return Response(gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
+@app.route('/latest_image')
+def latest_image():
+	return camera.get_frame()
+
+
 @auth.get_password
 def get_pw(username):
     if username in users:
