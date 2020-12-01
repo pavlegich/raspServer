@@ -26,9 +26,13 @@ endpoint = {
 # 'user' : auth.username()
 
 def gen(camera):
+	cap = cv2.VideoCapture(0)
+	cap.set(3,240) # set Width
+	cap.set(4,180) # set Height
 	while True:
-		frame = camera.get_frame()
-		gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+		# frame = camera.get_frame()
+		ret, img = cap.read()
+		gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 		faces = faceCascade.detectMultiScale(
 			gray,
 			scaleFactor=1.2,
@@ -38,8 +42,8 @@ def gen(camera):
 		for (x,y,w,h) in faces:
 			cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
 			roi_gray = gray[y:y+h, x:x+w]
-			roi_color = frame[y:y+h, x:x+w]
-		yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+			roi_color = img[y:y+h, x:x+w]
+		yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + img + b'\r\n')
 
 @app.route('/video_feed')
 def video_feed():
