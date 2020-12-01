@@ -40,7 +40,7 @@ def video_feed():
 
 @app.route('/image')
 def image():
-	return Response(gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
+	return Response(gen_img(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/latest_image')
 def latest_image():
