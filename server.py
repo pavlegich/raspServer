@@ -9,7 +9,7 @@ import cv2
 
 faceCascade = cv2.CascadeClassifier('Cascades/haarcascade_frontalface_default.xml')
 
-ip_address = flask.request.remote_addr
+ip_address = request.remote_addr
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hello'
