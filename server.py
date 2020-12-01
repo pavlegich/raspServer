@@ -9,8 +9,7 @@ import cv2
 
 faceCascade = cv2.CascadeClassifier('Cascades/haarcascade_frontalface_default.xml')
 
-ip_address = request.remote_addr
-
+ip_address = "192.168.43.210"
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hello'
 auth = HTTPDigestAuth()
