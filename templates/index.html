@@ -2,23 +2,66 @@
 {% block title %}Index{% endblock %}
 {% block content %}
 
-<div id="ind">
+<!-- <div id="ind">
 
     <p><input type="button" value="Hide this" id="ind_set" />
 
-</div>
+</div> -->
 
-<div>
-    <img src="{{ url_for('video_feed') }}" 
-    style="width: 240px; height: 180px; border: 2px solid red;">
-</div>
+<style type="text/css">
+    table tbody tr td {
+        border: 1px solid #2e82c3;
+        border-radius: 4px;
+        background: #f6f6f6;
+        min-width: 450px;
+    }
+</style>
+
+<table style="border-collapse: separate; border-spacing: 4px;">
+    
+    <tr>
+        <td valign="top">
+            <div style="text-align: center;">
+                <img src="{{ url_for('video_feed') }}" 
+                style="width: 240px; height: 180px; border: 2px solid red;">
+            </div>
+
+            <div>
+                <div id="X"> </div>
+                <div id="Y"> </div>
+                <div id="Z"> </div>
+                <div id="time"> </div>
+                <div id="UAV2"> </div>
+                <div id="UAV3"> </div>
+            </div>
+        </td>
+        <td valign="center" align="center">
+            <div>
+                <p><input type="button" value="Arm" id="arm" />
+                <input type="button" value="Disarm" id="disarm" /></p>
+                <p><input type="button" value="Up" id="up" />
+                <input type="button" value="Down" id="down" /></p>
+            </div>
+        </td>
+    </tr>
+
+</table>
 
 
 <script>
 
-    $("#ind_set").click(function(){
-        $("#ind").hide();
-    });
+
+    function gid(i) {return document.getElementById(i);}
+
+    gid("X").textContent = "Latitide: " + 20;
+    gid("Y").textContent = "Longitude: " + 20;
+    gid("Z").textContent = "Height: " + 20;
+    gid("time").textContent = "Time: " + {{time}};
+    gid("UAV2").innerText = "UAV2 predict: \n(" + {{UAV2["x1"]}} + ", " + {{UAV2["y1"]}} + "), (" + {{UAV2["x2"]}} + ", " + {{UAV2["y2"]}} + "), (" + {{UAV2["x3"]}} + ", " + {{UAV2["y3"]}} + "), (" + {{UAV2["x4"]}} + ", " + {{UAV2["y4"]}} + ")";
+    gid("UAV3").innerText = "UAV3 predict: \n(" + {{UAV3["x1"]}} + ", " + {{UAV3["y1"]}} + "), (" + {{UAV3["x2"]}} + ", " + {{UAV3["y2"]}} + "), (" + {{UAV3["x3"]}} + ", " + {{UAV3["y3"]}} + "), (" + {{UAV3["x4"]}} + ", " + {{UAV3["y4"]}} + ")";
+    // $("#ind_set").click(function(){
+    //     $("#ind").hide();
+    // });
     
 
 

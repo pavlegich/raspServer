@@ -7,7 +7,7 @@ from camera_pi import Camera
 import numpy as np
 import cv2
 
-faceCascade = cv2.CascadeClassifier('Cascades/haarcascade_frontalface_default.xml')
+# faceCascade = cv2.CascadeClassifier('Cascades/haarcascade_frontalface_default.xml')
 
 ip_address = "192.168.43.210"
 app = Flask(__name__)
@@ -22,6 +22,28 @@ endpoint = {
 	"x" : 0,
 	"y" : 0,
 	"z" : 0
+}
+
+UAV2 = {
+	"x1" : round(random.uniform(10.0, 12.0), 2),
+	"y1" : round(random.uniform(10.0, 12.0), 2),
+	"x2" : round(random.uniform(10.0, 12.0), 2),
+	"y2" : round(random.uniform(10.0, 12.0), 2),
+	"x3" : round(random.uniform(10.0, 12.0), 2),
+	"y3" : round(random.uniform(10.0, 12.0), 2),
+	"x4" : round(random.uniform(10.0, 12.0), 2),
+	"y4" : round(random.uniform(10.0, 12.0), 2)
+}
+
+UAV3 = {
+	"x1" : round(random.uniform(10.0, 12.0), 2),
+	"y1" : round(random.uniform(10.0, 12.0), 2),
+	"x2" : round(random.uniform(10.0, 12.0), 2),
+	"y2" : round(random.uniform(10.0, 12.0), 2),
+	"x3" : round(random.uniform(10.0, 12.0), 2),
+	"y3" : round(random.uniform(10.0, 12.0), 2),
+	"x4" : round(random.uniform(10.0, 12.0), 2),
+	"y4" : round(random.uniform(10.0, 12.0), 2)
 }
 
 # 'user' : auth.username()
@@ -56,7 +78,7 @@ def get_pw(username):
 @app.route('/')
 @auth.login_required
 def index():
-    return render_template("index.html")
+    return render_template("index.html", time = time.time(), UAV2 = UAV2, UAV3 = UAV3)
 
 @app.route('/status', methods=["GET"])
 @auth.login_required
