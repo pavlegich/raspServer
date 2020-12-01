@@ -30,7 +30,7 @@ last_frame = None
 def gen(camera):
 	while True:
 		frame = camera.get_frame()
-		last_frame = frame
+		last_frame = b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n'
 		yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 @app.route('/video_feed')
