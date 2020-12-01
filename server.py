@@ -45,10 +45,14 @@ def image():
 @app.route('/latest_image')
 def latest_image():
 	return """
+	{% extends "base.html" %}
+	{% block title %}Index{% endblock %}
+	{% block content %}
 	<div>
-    <img src="{{ url_for('image') }}" 
-    style="width: 320px; height: 240px;">
+    	<img src="{{ url_for('image') }}" 
+    	style="width: 320px; height: 240px;">
 	</div>
+	{% endblock %}
 	"""
 
 @auth.get_password
