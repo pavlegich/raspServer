@@ -25,12 +25,11 @@ endpoint = {
 
 # 'user' : auth.username()
 
-last_frame = None
+frame = None
 
 def gen(camera):
 	while True:
 		frame = camera.get_frame()
-		last_frame = frame
 		yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 @app.route('/video_feed')
@@ -39,9 +38,7 @@ def video_feed():
 
 @app.route('/latest_image')
 def latest_image():
-	return Response( \
-		yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' \
-			+ last_frame + b'\r\n'), mimetype='multipart/x-mixed-replace; boundary=frame')
+	return 1
 
 
 @auth.get_password
