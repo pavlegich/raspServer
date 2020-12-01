@@ -36,7 +36,7 @@ def video_feed():
 
 @app.route('/latest_image')
 def latest_image():
-	return Camera.get_frame()
+	return Camera().get_frame()
 
 
 @auth.get_password
