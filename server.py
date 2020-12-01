@@ -3,7 +3,7 @@ from flask_httpauth import HTTPDigestAuth
 from werkzeug.security import generate_password_hash, check_password_hash
 import time
 import random
-from picamera import Camera
+from camera_pi import Camera
 
 
 
