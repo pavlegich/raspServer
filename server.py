@@ -5,6 +5,8 @@ import time
 import random
 from camera_pi import Camera
 
+
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hello'
 auth = HTTPDigestAuth()
@@ -29,14 +31,6 @@ def gen(camera):
 @app.route('/video_feed')
 def video_feed():
 	return Response(gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
-
-@app.route('/camera')
-def camera():
-	timeNow = time.asctime(time.localtime(time.time()) )
-	templateData = {
-		'time': timeNow
-	}
-	return render_template('video_feed.html', **templateData)
 
 @auth.get_password
 def get_pw(username):
