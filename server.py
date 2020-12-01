@@ -44,9 +44,7 @@ def image():
 
 @app.route('/latest_image')
 def latest_image():
-	return """
-	<img src="{{ url_for('image') }}" style="width: 320px; height: 240px;">
-	"""
+	return render_template("latest_image.html")
 
 @auth.get_password
 def get_pw(username):
