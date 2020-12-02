@@ -25,25 +25,35 @@ endpoint = {
 }
 
 UAV2 = {
-	"x1" : round(random.uniform(10.0, 12.0), 2),
-	"y1" : round(random.uniform(10.0, 12.0), 2),
-	"x2" : round(random.uniform(10.0, 12.0), 2),
-	"y2" : round(random.uniform(10.0, 12.0), 2),
-	"x3" : round(random.uniform(10.0, 12.0), 2),
-	"y3" : round(random.uniform(10.0, 12.0), 2),
-	"x4" : round(random.uniform(10.0, 12.0), 2),
-	"y4" : round(random.uniform(10.0, 12.0), 2)
+
+	"x1" : 60.03158,
+	"y1" : 30.36,
+	"x2" : 60.03151,
+	"y2" : 30.36011,
+	"x3" : 60.03148,
+	"y3" : 30.3603,
+	"x4" : 60.03147,
+	"y4" : 30.3605
+
+	# "x1" : round(random.uniform(10.0, 12.0), 2),
+	# "y1" : round(random.uniform(10.0, 12.0), 2),
+	# "x2" : round(random.uniform(10.0, 12.0), 2),
+	# "y2" : round(random.uniform(10.0, 12.0), 2),
+	# "x3" : round(random.uniform(10.0, 12.0), 2),
+	# "y3" : round(random.uniform(10.0, 12.0), 2),
+	# "x4" : round(random.uniform(10.0, 12.0), 2),
+	# "y4" : round(random.uniform(10.0, 12.0), 2)
 }
 
 UAV3 = {
-	"x1" : round(random.uniform(10.0, 12.0), 2),
-	"y1" : round(random.uniform(10.0, 12.0), 2),
-	"x2" : round(random.uniform(10.0, 12.0), 2),
-	"y2" : round(random.uniform(10.0, 12.0), 2),
-	"x3" : round(random.uniform(10.0, 12.0), 2),
-	"y3" : round(random.uniform(10.0, 12.0), 2),
-	"x4" : round(random.uniform(10.0, 12.0), 2),
-	"y4" : round(random.uniform(10.0, 12.0), 2)
+	"x1" : 60.03143,
+	"y1" : 30.3613,
+	"x2" : 60.03153,
+	"y2" : 30.36151,
+	"x3" : 60.0316,
+	"y3" : 30.36172,
+	"x4" : 60.03159,
+	"y4" : 30.36191
 }
 
 # 'user' : auth.username()
@@ -74,11 +84,6 @@ def get_pw(username):
     if username in users:
         return users.get(username)
     return None
- 
-@app.route('/')
-@auth.login_required
-def index():
-    return render_template("index.html", time = time.time(), UAV2 = UAV2, UAV3 = UAV3)
 
 @app.route('/status', methods=["GET"])
 @auth.login_required
@@ -115,7 +120,7 @@ def sensor():
 	stype = request.args.get('type')
 	if stype == 'camera':
 		return jsonify({'type' : stype, 'image' : 'http://' + ip_address + ':5000/latest_image', \
-		 'time' : Camera().last_access })
+		 'time' : round(time.time()) })
 	elif stype == 'gps':
 		return jsonify({'type' : stype, 'x' : round(random.uniform(59.0, 60.0), 4), \
 			'y' : round(random.uniform(30.0, 31.0), 4), \
@@ -130,6 +135,11 @@ def game():
 # @auth.login_required
 # def logout():
 #     auth.username = None
+
+@app.route('/')
+@auth.login_required
+def index():
+    return render_template("index.html", time = time.time(), UAV2 = UAV2, UAV3 = UAV3)
 
 if __name__ == "__main__":
 	app.run(debug=True, host='0.0.0.0', threaded=True)
