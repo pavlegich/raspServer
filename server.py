@@ -3,9 +3,10 @@ from flask_httpauth import HTTPDigestAuth
 from werkzeug.security import generate_password_hash, check_password_hash
 import time
 import random
-from camera_pi import Camera
+# from camera_pi import Camera
 import numpy as np
 import cv2
+import threading
 
 # faceCascade = cv2.CascadeClassifier('Cascades/haarcascade_frontalface_default.xml')
 
@@ -13,6 +14,8 @@ ip_address = "192.168.43.210"
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hello'
 auth = HTTPDigestAuth()
+x1 = 60.03143
+y1 = 30.36020
 
 users = {
     "admin": "admin"
@@ -26,37 +29,51 @@ endpoint = {
 
 UAV2 = {
 
-	"x1" : 60.03158,
-	"y1" : 30.36,
-	"x2" : 60.03151,
-	"y2" : 30.36011,
-	"x3" : 60.03148,
-	"y3" : 30.3603,
-	"x4" : 60.03147,
-	"y4" : 30.3605
+	# "x1" : 60.03158,
+	# "y1" : 30.36,
+	# "x2" : 60.03151,
+	# "y2" : 30.36011,
+	# "x3" : 60.03148,
+	# "y3" : 30.3603,
+	# "x4" : 60.03147,
+	# "y4" : 30.3605
 
-	# "x1" : round(random.uniform(10.0, 12.0), 2),
-	# "y1" : round(random.uniform(10.0, 12.0), 2),
-	# "x2" : round(random.uniform(10.0, 12.0), 2),
-	# "y2" : round(random.uniform(10.0, 12.0), 2),
-	# "x3" : round(random.uniform(10.0, 12.0), 2),
-	# "y3" : round(random.uniform(10.0, 12.0), 2),
-	# "x4" : round(random.uniform(10.0, 12.0), 2),
-	# "y4" : round(random.uniform(10.0, 12.0), 2)
+	"x1" : round(random.uniform(60.03158, 60.03160), 5),
+	"y1" : round(random.uniform(30.36010, 30.36011), 5),
+	"x2" : round(random.uniform(60.03161, 60.03163), 5),
+	"y2" : round(random.uniform(30.36012, 30.36014), 5),
+	"x3" : round(random.uniform(60.03164, 60.03167), 5),
+	"y3" : round(random.uniform(30.36013, 30.36015), 5),
+	"x4" : round(random.uniform(60.03168, 60.03169), 5),
+	"y4" : round(random.uniform(30.36015, 30.36016), 5),
 }
 
 UAV3 = {
-	"x1" : 60.03143,
-	"y1" : 30.3613,
-	"x2" : 60.03153,
-	"y2" : 30.36151,
-	"x3" : 60.0316,
-	"y3" : 30.36172,
-	"x4" : 60.03159,
-	"y4" : 30.36191
+	# "x1" : 60.03143,
+	# "y1" : 30.3613,
+	# "x2" : 60.03153,
+	# "y2" : 30.36151,
+	# "x3" : 60.0316,
+	# "y3" : 30.36172,
+	# "x4" : 60.03159,
+	# "y4" : 30.36191
+	"x1" : round(random.uniform(x1, x1+0.00002), 5),
+	"y1" : round(random.uniform(y1, y1+0.00002), 5),
+	"x2" : round(random.uniform(x1+0.00002, x1+0.00004), 5),
+	"y2" : round(random.uniform(y1+0.00004, y1+0.00006), 5),
+	"x3" : round(random.uniform(x1+0.00004, x1+0.00006), 5),
+	"y3" : round(random.uniform(y1+0.00006, y1+0.00008), 5),
+	"x4" : round(random.uniform(x1+0.00006, x1+0.00008), 5),
+	"y4" : round(random.uniform(y1+0.00008, x1+0.00010), 5),
 }
 
 # 'user' : auth.username()
+
+def setInterval(func,time):
+    e = threading.Event()
+    while not e.wait(time):
+        func()
+
 
 def gen_img(camera):
 	frame = camera.get_frame()
@@ -136,10 +153,15 @@ def game():
 # def logout():
 #     auth.username = None
 
+# @app.route('/map')
+# @auth.login_required
+# def map():
+# 	return render_template("map.html")
+
 @app.route('/')
 @auth.login_required
 def index():
-    return render_template("index.html", time = time.time(), UAV2 = UAV2, UAV3 = UAV3)
+    return render_template("index.html", UAV2 = UAV2, UAV3 = UAV3)
 
 if __name__ == "__main__":
 	app.run(debug=True, host='0.0.0.0', threaded=True)
