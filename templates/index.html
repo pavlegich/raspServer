@@ -17,7 +17,7 @@
     }
 </style>
 
-<table style="border-collapse: separate; border-spacing: 4px;">
+<table id="data" style="border-collapse: separate; border-spacing: 4px;">
     
     <tr>
         <td valign="top">
@@ -53,10 +53,22 @@
 
     function gid(i) {return document.getElementById(i);}
 
+    // $("#data").always(function(){
+    //     $.ajax({
+    //         method: "GET",
+    //         url: "/"
+    //     })
+    //     .done(function(data) {
+    //         gid("time").textContent(data.time).show();
+    //     });
+    // });
+
+
     gid("X").textContent = "Latitide: " + 20;
     gid("Y").textContent = "Longitude: " + 20;
     gid("Z").textContent = "Height: " + 20;
     gid("time").textContent = "Time: " + {{time}};
+    
     gid("UAV2").innerText = "UAV2 predict: \n(" + {{UAV2["x1"]}} + ", " + {{UAV2["y1"]}} + "), (" + {{UAV2["x2"]}} + ", " + {{UAV2["y2"]}} + "), (" + {{UAV2["x3"]}} + ", " + {{UAV2["y3"]}} + "), (" + {{UAV2["x4"]}} + ", " + {{UAV2["y4"]}} + ")";
     gid("UAV3").innerText = "UAV3 predict: \n(" + {{UAV3["x1"]}} + ", " + {{UAV3["y1"]}} + "), (" + {{UAV3["x2"]}} + ", " + {{UAV3["y2"]}} + "), (" + {{UAV3["x3"]}} + ", " + {{UAV3["y3"]}} + "), (" + {{UAV3["x4"]}} + ", " + {{UAV3["y4"]}} + ")";
     // $("#ind_set").click(function(){
