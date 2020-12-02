@@ -1,152 +1,147 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Index</title>
-    <script
-        src="https://code.jquery.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-        crossorigin="anonymous"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9eMnKZecXg-A_Tq0NHCegDtg6bnF3qHs&callback=initMap&libraries=&v=weekly"
-      defer
-    ></script>
-    <style type="text/css">
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
+<head>
+  <title>index</title>
+  
+  <script
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9eMnKZecXg-A_Tq0NHCegDtg6bnF3qHs&callback=initMap&libraries=&v=weekly"
+    defer
+  ></script>
 
-      /* Optional: Makes the sample page fill the window. */
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
-    <script>
-      let map;
-
-      function initMap() {
-        map = new google.maps.Map(document.getElementById("map"), {
-          center: { lat: -34.397, lng: 150.644 },
-          zoom: 8,
-        });
-      }
-    </script>
-  </head>
-  <body>
-    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/status">status</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/manual_drive">manual_drive</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/getendpoint">getendpoint</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/setendpoint">setendpoint</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/sensor?type=camera">sensor_camera</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/sensor?type=gps">sensor_gps</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/video_feed">video_feed</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/latest_image">latest_image</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/game">mini_game</a>
-        </li>
-      </ul>
-    </div>
-    </nav> -->
-
-    <style type="text/css">
-    table tbody tr td {
-        border: 1px solid #2e82c3;
-        border-radius: 4px;
-        background: #f6f6f6;
-        min-width: 450px;
+  <style type="text/css">
+    #map {
+      height: 100%;
     }
-    </style>
-    <table id="data" style="border-collapse: separate; border-spacing: 4px;">
-    
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    table tbody tr td {
+      border: 1px solid #2e82c3;
+      border-radius: 4px;
+      background: #f6f6f6;
+      min-width: 450px;
+    }
+  </style>
+
+  <script>
+    let map;
+
+    function initMap() {
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8,
+      });
+    }
+  </script>
+</head>
+
+<body>
+  <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/status">status</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/manual_drive">manual_drive</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/getendpoint">getendpoint</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/setendpoint">setendpoint</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/sensor?type=camera">sensor_camera</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/sensor?type=gps">sensor_gps</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/video_feed">video_feed</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/latest_image">latest_image</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/game">mini_game</a>
+      </li>
+    </ul>
+  </div>
+  </nav> -->
+
+  <table id="data" style="border-collapse: separate; border-spacing: 4px;">
     <tr>
-        <td valign="top">
-            <div style="text-align: center;">
-                <img src="{{ url_for('video_feed') }}" 
-                style="width: 480px; height: 320px; border: 2px solid red;">
-            </div>
+      <td valign="top">
+          <div style="text-align: center;">
+              <img src="{{ url_for('video_feed') }}" 
+              style="width: 480px; height: 320px; border: 2px solid red;">
+          </div>
 
-            <div>
-                <div id="X"> </div>
-                <div id="Y"> </div>
-                <div id="Z"> </div>
-                <div id="time"> </div>
-                <div id="UAV2"> </div>
-                <div id="UAV3"> </div>
-            </div>
-        </td>
-        <td valign="top" align="center">
-            <div id="map"style="width: 480px; height: 320px; border: 2px solid red;">
-                
-            </div>
-            <div>
-                <p><input type="button" value="Arm" id="arm" />
-                <input type="button" value="Disarm" id="disarm" /></p>
-                <p><input type="button" value="Up" id="up" />
-                <input type="button" value="Down" id="down" /></p>
-            </div>
-        </td>
+          <div>
+              <div id="X"> </div>
+              <div id="Y"> </div>
+              <div id="Z"> </div>
+              <div id="time"> </div>
+              <div id="UAV2"> </div>
+              <div id="UAV3"> </div>
+          </div>
+      </td>
+      <td valign="top" align="center">
+          <div id="map"style="width: 480px; height: 320px; border: 2px solid red;">
+              
+          </div>
+          <div>
+              <p><input type="button" value="Arm" id="arm" />
+              <input type="button" value="Disarm" id="disarm" /></p>
+              <p><input type="button" value="Up" id="up" />
+              <input type="button" value="Down" id="down" /></p>
+          </div>
+      </td>
     </tr>
+  </table>
 
-    </table>
+  <script>
+    function gid(i) {return document.getElementById(i);}
 
+    gid("X").textContent = "Latitide: " + 20;
+    gid("Y").textContent = "Longitude: " + 20;
+    gid("Z").textContent = "Height: " + 20;
+    gid("time").textContent = "Time: 0";
+    
+    gid("UAV2").innerText = "UAV2 predict: \n(" + {{UAV2["x1"]}} + ", " + {{UAV2["y1"]}} + "), (" + {{UAV2["x2"]}} + ", " + {{UAV2["y2"]}} + "), \n(" + {{UAV2["x3"]}} + ", " + {{UAV2["y3"]}} + "), (" + {{UAV2["x4"]}} + ", " + {{UAV2["y4"]}} + ")";
+    gid("UAV3").innerText = "UAV3 predict: \n(" + {{UAV3["x1"]}} + ", " + {{UAV3["y1"]}} + "), (" + {{UAV3["x2"]}} + ", " + {{UAV3["y2"]}} + "), \n(" + {{UAV3["x3"]}} + ", " + {{UAV3["y3"]}} + "), (" + {{UAV3["x4"]}} + ", " + {{UAV3["y4"]}} + ")";
+    
 
-    <script>
-      
-      function gid(i) {return document.getElementById(i);}
-
-
-      gid("X").textContent = "Latitide: " + 20;
-      gid("Y").textContent = "Longitude: " + 20;
-      gid("Z").textContent = "Height: " + 20;
-      gid("time").textContent = "Time: 0";
-      
-      gid("UAV2").innerText = "UAV2 predict: \n(" + {{UAV2["x1"]}} + ", " + {{UAV2["y1"]}} + "), (" + {{UAV2["x2"]}} + ", " + {{UAV2["y2"]}} + "), \n(" + {{UAV2["x3"]}} + ", " + {{UAV2["y3"]}} + "), (" + {{UAV2["x4"]}} + ", " + {{UAV2["y4"]}} + ")";
-      gid("UAV3").innerText = "UAV3 predict: \n(" + {{UAV3["x1"]}} + ", " + {{UAV3["y1"]}} + "), (" + {{UAV3["x2"]}} + ", " + {{UAV3["y2"]}} + "), \n(" + {{UAV3["x3"]}} + ", " + {{UAV3["y3"]}} + "), (" + {{UAV3["x4"]}} + ", " + {{UAV3["y4"]}} + ")";
-      
-
-      var statusIntervalId = window.setInterval(update, 1000);
+    var statusIntervalId = window.setInterval(update, 1000);
 
 
-      function update() {
-          $.ajax({
-              url: '/',
-              dataType: 'text',
-              success: function(data) {
-                  $("#time").text("Time: " + Date.now()*1e-3);
-              }
-          })
-      }
+    function update() {
+        $.ajax({
+            url: '/',
+            dataType: 'text',
+            success: function(data) {
+                $("#time").text("Time: " + Date.now()*1e-3);
+            }
+        })
+    }
+  </script>
 
-    </script>
-  </body>
+</body>
 </html>
