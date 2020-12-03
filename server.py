@@ -7,7 +7,6 @@ from camera_pi import Camera
 import numpy as np
 import cv2
 import threading
-import sys
 
 # faceCascade = cv2.CascadeClassifier('Cascades/haarcascade_frontalface_default.xml')
 
@@ -115,8 +114,7 @@ def status():
 @app.route('/manual_drive', methods=["GET"])
 @auth.login_required
 def manual_drive():
-	print(time.time(), file=sys.stdout)
-    return jsonify({'up' : True, 'down' : False, 'click' : time.time()})
+    return jsonify({'up' : True, 'down' : False})
 
 @app.route('/getendpoint', methods=["GET"])
 @auth.login_required
