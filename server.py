@@ -7,6 +7,7 @@ from camera_pi import Camera
 import numpy as np
 import cv2
 import threading
+import sys, errno
 
 # faceCascade = cv2.CascadeClassifier('Cascades/haarcascade_frontalface_default.xml')
 
@@ -90,7 +91,7 @@ def video_feed():
 		return Response(gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 	except IOError as e:
 		if e.errno == errno.EPIPE:
-        	return jsonify({'error' : True})
+			return jsonify({'error' : True})
 
 @app.route('/image')
 def image():
