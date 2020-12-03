@@ -22,6 +22,12 @@ users = {
     "admin": "admin"
 }
 
+@auth.get_password
+def get_pw(username):
+    if username in users:
+        return users.get(username)
+    return None
+
 endpoint = {
 	"x" : 0,
 	"y" : 0,
@@ -86,22 +92,19 @@ def gen(camera):
 		yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 @app.route('/video_feed')
+@auth.login_required
 def video_feed():
 	return Response(gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/image')
+@auth.login_required
 def image():
 	return Response(gen_img(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/latest_image')
+@auth.login_required
 def latest_image():
 	return render_template("latest_image.html")
-
-@auth.get_password
-def get_pw(username):
-    if username in users:
-        return users.get(username)
-    return None
 
 @app.route('/status', methods=["GET"])
 @auth.login_required
@@ -112,7 +115,7 @@ def status():
 			'state' : 1, 'time' : round(time.time())})
 
 @app.route('/manual_drive', methods=["GET"])
-# @auth.login_required
+@auth.login_required
 def manual_drive():
     return jsonify({'up' : True, 'down' : False})
 
@@ -146,6 +149,7 @@ def sensor():
 
 
 @app.route('/game')
+@auth.login_required
 def game():
     return render_template("game.html")
 
