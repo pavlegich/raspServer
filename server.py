@@ -86,7 +86,11 @@ def gen(camera):
 
 @app.route('/video_feed')
 def video_feed():
-	return Response(gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
+	try:
+		return Response(gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
+	except IOError as e:
+		if e.errno == errno.EPIPE:
+        	return jsonify({'error' : True})
 
 @app.route('/image')
 def image():
