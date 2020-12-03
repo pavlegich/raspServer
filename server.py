@@ -10,7 +10,8 @@ import threading
 
 # faceCascade = cv2.CascadeClassifier('Cascades/haarcascade_frontalface_default.xml')
 
-ip_address = "192.168.43.210"
+# ip_address = "192.168.43.210"
+ip_address = "192.168.1.102"
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hello'
 auth = HTTPDigestAuth()
