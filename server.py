@@ -115,6 +115,7 @@ def status():
 @auth.login_required
 def manual_drive():
     return jsonify({'up' : True, 'down' : False})
+    print now
 
 @app.route('/getendpoint', methods=["GET"])
 @auth.login_required
