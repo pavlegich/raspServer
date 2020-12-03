@@ -114,6 +114,7 @@ def status():
 @app.route('/manual_drive', methods=["GET"])
 @auth.login_required
 def manual_drive():
+	print time.time()
     return jsonify({'up' : True, 'down' : False, 'click' : time.time()})
 
 @app.route('/getendpoint', methods=["GET"])
