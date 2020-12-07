@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import time
 import datetime
 import random
-# from camera_pi import Camera
+from camera_pi import Camera
 # import numpy as np
 import cv2
 import threading
