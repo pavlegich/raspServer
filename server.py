@@ -5,10 +5,9 @@ import time
 import datetime
 import random
 # from camera_pi import Camera
-import numpy as np
+# import numpy as np
 import cv2
 import threading
-from pymavlink import mavutil 
 
 # faceCascade = cv2.CascadeClassifier('Cascades/haarcascade_frontalface_default.xml')
 
