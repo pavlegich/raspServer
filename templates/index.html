@@ -5,117 +5,285 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
   <script
-      src="https://code.jquery.com/jquery-3.4.1.js"
-      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-      crossorigin="anonymous"></script>
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9eMnKZecXg-A_Tq0NHCegDtg6bnF3qHs&callback=initMap&libraries=&v=weekly"
     defer
   ></script>
-  <!-- <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
-  <div id="time" style="padding-left: 5px;"> </div>
-  <table id="data" style="border-collapse: separate; border-spacing: 4px;">
-    <tr>
-      <td class="mytab" valign="top" width="20%">
-        <div style="text-align: left;">
-            <img src="{{ url_for('video_feed') }}" 
-              style="width: 320px; height: 240px; border: 1px solid #8B4513;">
-        </div>
-        <div align="center">
-          <p><input type="button" value="Arm" id="arm" />
-          <input type="button" value="Disarm" id="disarm" /></p>
-          <p><input type="button" value="Up" id="up" />
-          <input type="button" value="Down" id="down" /></p>
-        </div>
-        <div>
-          <table>
-            <tr>
-              <td class="xyz">Latitide</td>
-              <td class="xyz">Longitide</td>
-              <td class="xyz">Height</td>
-            </tr>
-            <tr>
-              <td class="xyz"><div id="X"></div></td>
-              <td class="xyz"><div id="Y"></div></td>
-              <td class="xyz"><div id="Z"></div></td>
-            </tr>
-          </table>
-        </div>
-        <div>
-          <div id="UAV2"> </div>
-          <br />
-          <div id="UAV3"> </div>
-        </div>
-        
-        
-      </td width="80%">
-      <td valign="top">
-        <div id="map" class="map" style="width: 100%; height: 480px; border: 1px solid #8B4513;">
-        </div>
-      </td>
-    </tr>
-  </table>
+  <div id="page">
+    <div id="time" style="padding-left: 5px;"> </div>
+    <table id="data" style="border-collapse: separate; border-spacing: 4px;" >
+      <tr>
+        <td class="mytab" valign="top">
+          <div style="text-align: center;">
+              <img src="{{ url_for('video_feed') }}" 
+                style="width: 320px; height: 240px; border: 1px solid #8B4513;">
+          </div>
+          <br>
+          <div align="center">
+            <p><input type="button" value="Arm" id="arm" />
+            <input type="button" value="Disarm" id="disarm" /></p>
+            <p><input type="button" value="Up" id="up" />
+            <input type="button" value="Down" id="down" /></p>
+          </div>
 
+          <div align="middle">
+            <div class="tab">
+                <button class="tablinks" onclick="openPage(event, 'UAV')">UAV
+                </button>
+                <button class="tablinks" onclick="openPage(event, 'UAV2')">UAV2
+                </button>
+                <button class="tablinks" onclick="openPage(event, 'UAV3')">UAV3
+                </button>
+                <button class="tablinks" onclick="openPage(event, 'getPoint')">End Point
+                </button>
+                <button class="tablinks" onclick="openPage(event, 'setPoint')">Set
+                </button>
+            </div>
 
-<script type="text/javascript">
+            <div id="UAV" class="tabcontent">
+              <table class="xyz_red">
+                <tr>
+                  <td>Latitide</td>
+                  <td>Longitide</td>
+                  <td>Height</td>
+                </tr>
+                <tr>
+                  <td ><div id="X"></div></td>
+                  <td><div id="Y"></div></td>
+                  <td><div id="Z"></div></td>
+                </tr>
+              </table>
+            </div>
+
+            <div id="UAV2" class="tabcontent">
+              <table class="xyz_orange">
+                <tr>
+                  <td>Latitide</td>
+                  <td>Longitide</td>
+                  <td>Height</td>
+                </tr>
+                <tr>
+                  <td><div id="X2"></div></td>
+                  <td><div id="Y2"></div></td>
+                  <td><div id="Z2"></div></td>
+                </tr>
+              </table>
+            </div>
+
+            <div id="UAV3" class="tabcontent">
+              <table class="xyz_violet">
+                <tr>
+                  <td>Latitide</td>
+                  <td>Longitide</td>
+                  <td>Height</td>
+                </tr>
+                <tr>
+                  <td><div id="X3"></div></td>
+                  <td><div id="Y3"></div></td>
+                  <td><div id="Z3"></div></td>
+                </tr>
+              </table>
+            </div>
+
+            <div id="getPoint" class="tabcontent">
+              <table class="xyz_red">
+                <tr>
+                  <td>Latitide</td>
+                  <td>Longitide</td>
+                  <td>Height</td>
+                </tr>
+                <tr>
+                  <td><div id="getX"></div></td>
+                  <td><div id="getY"></div></td>
+                  <td><div id="getZ"></div></td>
+                </tr>
+              </table>
+            </div>
+
+            <div id="setPoint" class="tabcontent">
+              <div id="successAlert_set" class="alert alert-success" role="alert" style="display: none; width: 100%; text-align: center;"></div>
+              <div id="errorAlert_set" class="alert alert-danger" role="alert" style="display: none; width: 100%; text-align: center;"></div>
+              <table>
+                <tr>
+                  <td style="text-align: right;">Latitide:</td>
+                  <td><input type="text" id="setX" /></td>
+                </tr>
+                <tr>
+                  <td style="text-align: right;">Longitide:</td>
+                  <td><input type="text" id="setY" /></td>
+                </tr>
+                <tr>
+                  <td style="text-align: right;">Height:</td>
+                  <td><input type="text" id="setZ" /></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td align="right">
+                    <input id="setendpoint" type="button" value="Submit"/></td>
+                </tr>
+              </table>
+            </div>
+          </div> 
+        </td>
+        <td valign="top" width="75%">
+          <div id="map" class="map" style="width: 100%; height: 575px; border: 1px solid #8B4513;">
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <script type="text/javascript">
     
+    function gid(i) {return document.getElementById(i);}
 
-  let map;
+    gid("X").textContent = 0;
+    gid("Y").textContent = 0;
+    gid("Z").textContent = 0;
+    gid("time").textContent = 0;
 
-  function initMap() {
-    const UAV = { lat: {{UAV["x"]}}, lng: {{UAV["y"]}} };
-    const UAV2 = { lat: {{UAV2["x"]}}, lng: {{UAV2["y"]}} };
-    const UAV3 = { lat: {{UAV3["x"]}}, lng: {{UAV3["y"]}} };
-    map = new google.maps.Map(document.getElementById("map"), {
-      center: { lat: 60.031, lng: 30.360 },
-      zoom: 8
-    });
+    var UAV = { lat: 0, lng: 0 };
+    var UAV2 = { lat: 0, lng: 0 };
+    var UAV3 = { lat: 0, lng: 0 };
 
-    addMarker("UAV", UAV, map);
-    addMarker("UAV2", UAV2, map);
-    addMarker("UAV3", UAV3, map);
-  }
+    let map;
+    let markers = [];
 
-  function addMarker(label, location, map) {
-    new google.maps.Marker({
-      position: location,
-      map: map,
-      icon: "{{ url_for('static', filename='img/map_icon.png') }}",
-      label: label
-    });
-  }
+    function initMap() {
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 59.9574645, lng: 30.3083750 },
+        zoom: 10
+      });
+    }
 
-  function gid(i) {return document.getElementById(i);}
+    function addMarker(label, location, map) {
+      const marker = new google.maps.Marker({
+        position: location,
+        map: map,
+        icon: "{{ url_for('static', filename='img/map_icon.png') }}",
+        label: label
+      });
+      markers.push(marker);
+    }
 
-  gid("X").textContent = 60.031;
-  gid("Y").textContent = 30.360;
-  gid("Z").textContent = 20;
-  gid("time").textContent = 0;
-
-  // gid("UAV2").innerText = "UAV2 predict: \n(" + {{UAV2["x1"]}} + ", " + {{UAV2["y1"]}} + "), (" + {{UAV2["x2"]}} + ", " + {{UAV2["y2"]}} + "), \n(" + {{UAV2["x3"]}} + ", " + {{UAV2["y3"]}} + ")";
-  // gid("UAV3").innerText = "UAV3 predict: \n(" + {{UAV3["x1"]}} + ", " + {{UAV3["y1"]}} + "), (" + {{UAV3["x2"]}} + ", " + {{UAV3["y2"]}} + "), \n(" + {{UAV3["x3"]}} + ", " + {{UAV3["y3"]}} + ")";
-
-
-  var statusIntervalId = window.setInterval(update, 1000);
+    function deleteMarkers() {
+      for (let i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+      }
+      markers = [];
+    }
 
 
-  function update() {
+    // gid("UAV2").innerText = "UAV2 predict: \n(" + {{UAV2["x1"]}} + ", " + {{UAV2["y1"]}} + "), (" + {{UAV2["x2"]}} + ", " + {{UAV2["y2"]}} + "), \n(" + {{UAV2["x3"]}} + ", " + {{UAV2["y3"]}} + ")";
+    // gid("UAV3").innerText = "UAV3 predict: \n(" + {{UAV3["x1"]}} + ", " + {{UAV3["y1"]}} + "), (" + {{UAV3["x2"]}} + ", " + {{UAV3["y2"]}} + "), \n(" + {{UAV3["x3"]}} + ", " + {{UAV3["y3"]}} + ")";
+
+    var statusIntervalId = window.setInterval(update, 5000);
+
+    function update() {
+        $.ajax({
+            type: "GET",
+            url: '/get_gps',
+            dataType: 'json',
+            success: function(data) {
+                $("#X2").text(Math.round(data.x*1e4)/1e4);
+                $("#Y2").text(Math.round(data.y*1e4)/1e4);
+                $("#Z2").text(data.z);
+
+                UAV2 = { lat: data.x, lng: data.y };
+            }
+        })
+
+        $.ajax({
+            type: "GET",
+            url: '/get_gps3',
+            dataType: 'json',
+            success: function(data) {
+                $("#X3").text(Math.round(data.x*1e4)/1e4);
+                $("#Y3").text(Math.round(data.y*1e4)/1e4);
+                $("#Z3").text(data.z);
+
+                UAV3 = { lat: data.x, lng: data.y };
+            }
+        })
+
+        $.ajax({
+            type: "GET",
+            url: '/getendpoint',
+            dataType: 'json',
+            success: function(data) {
+                $("#getX").text(Math.round(data.x*1e4)/1e4);
+                $("#getY").text(Math.round(data.y*1e4)/1e4);
+                $("#getZ").text(data.z);
+            }
+        })
+
+        $.ajax({
+            type: "GET",
+            url: '/status',
+            dataType: 'json',
+            success: function(data) {
+                $("#time").text(data.time);
+                $("#X").text(Math.round(data.x*1e4)/1e4);
+                $("#Y").text(Math.round(data.y*1e4)/1e4);
+                $("#Z").text(data.z);
+
+                var UAV = { lat: data.x, lng: data.y };
+                deleteMarkers();
+                addMarker("UAV", UAV, map);
+                addMarker("UAV2", UAV2, map);
+                addMarker("UAV3", UAV3, map);
+
+            }
+        })
+    }
+
+    $("#setendpoint").click(function(){
       $.ajax({
-          url: '/',
-          dataType: 'text',
-          success: function(data) {
-              var now = new Date();
-              $("#time").text(now);
-              // $("#time").text(Math.round((Date.now()*1e-3)*100)/100);
-          }
+        method: "POST",
+        url: "/setendpoint",
+        data: {
+          setX : $("#setX").val(),
+          setY : $("#setY").val(),
+          setZ : $("#setZ").val()
+        }
       })
-  }
-</script>
+      .done(function(data){
+        if (data.status == "OK"){
+          $('#successAlert_set').text("Coordinates are set!").show();
+          $('#errorAlert_set').hide();
+          $(this).delay(5000).queue(function() {
+            $('#successAlert_set').hide();
+            $(this).dequeue();
+          });
+        }
+      });
+    })
 
+    document.getElementById('UAV').style.display = "block";
+
+    function openPage(evt, name) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(name).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+  </script>
+  <!-- <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script> -->
 
 </body>
 </html>

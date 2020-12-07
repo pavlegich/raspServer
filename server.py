@@ -2,11 +2,13 @@ from flask import Flask, render_template, redirect, url_for, request, session, f
 from flask_httpauth import HTTPDigestAuth
 from werkzeug.security import generate_password_hash, check_password_hash
 import time
+import datetime
 import random
 # from camera_pi import Camera
 import numpy as np
 import cv2
 import threading
+from pymavlink import mavutil 
 
 # faceCascade = cv2.CascadeClassifier('Cascades/haarcascade_frontalface_default.xml')
 
@@ -34,16 +36,8 @@ endpoint = {
 	"z" : 0
 }
 
-UAV = {
-	"x" : 59.972919,
-	"y" : 30.302309,
-	"z" : 0
-}
-
 UAV2 = {
-	
-	"x" : 59.822621,
-	"y" : 30.347212,
+
 	"x1" : round(random.uniform(60.03158, 60.03160), 5),
 	"y1" : round(random.uniform(30.36010, 30.36011), 5),
 	"x2" : round(random.uniform(60.03161, 60.03163), 5),
@@ -69,14 +63,6 @@ UAV3 = {
 	"y3" : round(random.uniform(y1+0.00006, y1+0.00008), 5)
 }
 
-# 'user' : auth.username()
-
-# def setInterval(func,time):
-#     e = threading.Event()
-#     while not e.wait(time):
-#         func()
-
-
 def gen_img(camera):
 	frame = camera.get_frame()
 	yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
@@ -85,6 +71,23 @@ def gen(camera):
 	while True:
 		frame = camera.get_frame()
 		yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+@app.route('/get_gps')
+@auth.login_required
+def get_gps():
+	return jsonify({'x' : random.uniform(59.973982, 59.973478), \
+			'y' : random.uniform(30.298140, 30.300297), \
+			'z' : round(random.uniform(15.0, 17.0), 2), \
+			'state' : 1, 'time' : datetime.datetime.now()})
+
+@app.route('/get_gps3')
+@auth.login_required
+def get_gps3():
+	return jsonify({'x' : random.uniform(59.974933, 59.974471), \
+			'y' : random.uniform(30.297115, 30.299476), \
+			'z' : round(random.uniform(15.0, 17.0), 2), \
+			'state' : 1, 'time' : datetime.datetime.now()})
+
 
 @app.route('/video_feed')
 @auth.login_required
@@ -104,10 +107,10 @@ def latest_image():
 @app.route('/status', methods=["GET"])
 @auth.login_required
 def status():
-    return jsonify({'x' : round(random.uniform(59.0, 60.0), 4), \
-			'y' : round(random.uniform(30.0, 31.0), 4), \
-			'z' : round(random.uniform(1.0, 20.0), 2), \
-			'state' : 1, 'time' : round(time.time())})
+    return jsonify({'x' : random.uniform(59.974203, 59.973999), \
+			'y' : random.uniform(30.295013, 30.297577), \
+			'z' : round(random.uniform(15.0, 17.0), 2), \
+			'state' : 1, 'time' : datetime.datetime.now()})
 
 @app.route('/manual_drive', methods=["GET"])
 @auth.login_required
@@ -123,10 +126,10 @@ def getendpoint():
 @auth.login_required
 def setendpoint():
 	if request.method == "POST":
-		endpoint["x"] = request.form["endX"]
-		endpoint["y"] = request.form["endY"]
-		endpoint["z"] = request.form["endZ"]
-		return redirect(url_for("index"))
+		endpoint["x"] = request.values["setX"]
+		endpoint["y"] = request.values["setY"]
+		endpoint["z"] = request.values["setZ"]
+		return jsonify({'status' : 'OK'})
 	else:
 		return render_template("setendpoint.html")
 
@@ -148,27 +151,15 @@ def sensor():
 def game():
     return render_template("game.html")
 
-@auth.login_required
-def get_gps():
-	UAV["x"] = 59.972919
-	UAV["y"] = 30.302309
-	UAV["z"] = 15
-	return 1
-
 # @app.route('/logout', methods=['GET', 'POST'])
 # @auth.login_required
 # def logout():
 #     auth.username = None
 
-# @app.route('/map')
-# @auth.login_required
-# def map():
-# 	return render_template("map.html")
-
 @app.route('/')
 @auth.login_required
 def index():
-    return render_template("index.html", UAV = UAV, UAV2 = UAV2, UAV3 = UAV3)
+    return render_template("index.html", UAV2 = UAV2, UAV3 = UAV3)
 
 if __name__ == "__main__":
 	app.run(debug=True, host='0.0.0.0', threaded=True)
