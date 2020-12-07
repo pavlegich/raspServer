@@ -1,3 +1,4 @@
+import os
 from pymavlink import mavutil 
 
 master = mavutil.mavlink_connection('udpout:0.0.0.0:14550')
