@@ -11,7 +11,7 @@ vehicle.wait_heartbeat()
 
 # GPS
 
-status = vehicle.mavlink.GPS_STATUS
+status = mavutil.mavlink.GPS_STATUS
 print(status)
 
 
