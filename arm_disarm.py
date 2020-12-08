@@ -7,23 +7,23 @@ from pymavlink import mavutil
 # Create the connection
 vehicle = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
 # Wait a heartbeat before sending commands
-# vehicle.wait_heartbeat()
+vehicle.wait_heartbeat()
 
 # GPS
 
 
 
-status = vehicle.recv_match(type='GPS_STATUS', blocking=True)
+# status = vehicle.recv_match(type='GPS_STATUS')
 # messages("GPS_RAW_INT").satellites_visible
-print(status.to_dict())
+# print(status)
 
 
 # https://mavlink.io/en/messages/common.html#MAV_CMD_COMPONENT_ARM_DISARM
 
 # Arm
-# vehicle.arducopter_arm()
-# armed = vehicle.motors_armed()
-# print(armed)
+vehicle.arducopter_arm()
+armed = vehicle.motors_armed()
+print(armed)
 
 
 # master.mav.command_long_send(
