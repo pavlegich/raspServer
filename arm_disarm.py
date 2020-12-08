@@ -6,7 +6,7 @@ from pymavlink import mavutil
 
 # Create the connection
 # vehicle = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
-vehicle = mavutil.mavlink_connection('udpin:0.0.0.0:14550')
+vehicle = mavutil.mavlink_connection('udp:0.0.0.0:14550')
 # Wait a heartbeat before sending commands
 # vehicle.wait_heartbeat()
 
