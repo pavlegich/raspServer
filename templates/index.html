@@ -242,7 +242,7 @@
                 $("#Y").text(Math.round(data.y*1e4)/1e4);
                 $("#Z").text(Math.round(data.z*1e4)/1e4);
 
-                var UAV = { lat: data.x, lng: data.y };
+                UAV = { lat: data.x, lng: data.y };
               }
               else {
                 $('#errorAlert_uav').text("GPS signal is lost!").show();
