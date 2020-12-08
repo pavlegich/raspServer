@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import os
 from pymavlink import mavutil 
 
