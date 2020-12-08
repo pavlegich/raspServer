@@ -13,4 +13,4 @@ while True:
 		timestamp = master.time_since('GPS_RAW_INT')
 		print(altitude)
 	except:
-    	print('No GPS_RAW_INT message received')
+		print('No GPS_RAW_INT message received')
