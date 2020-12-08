@@ -21,7 +21,7 @@ vehicle.wait_heartbeat()
 # location = vehicle.location()
 # print(location)
 
-lat = vehicle.messages["GPS_STATUS"]
+lat = vehicle.messages["GPS_RAW_INT"].lat
 print(lat)
 
 # https://mavlink.io/en/messages/common.html#MAV_CMD_COMPONENT_ARM_DISARM
