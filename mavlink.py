@@ -10,9 +10,12 @@ master.wait_heartbeat()
 # Get some information !
 while True:
 	try:
-		altitude = master.messages['GPS_RAW_INT']  # Note, you can access message fields as attributes!
-		timestamp = master.time_since('GPS_RAW_INT')
-		print(altitude)
+		lat = master.messages['GPS_RAW_INT'].lat*1e-2  # Note, you can access message fields as attributes!
+		lon = master.messages['GPS_RAW_INT'].lon*1e-2
+		alt = master.messages['GPS_RAW_INT'].alt*1e-2
+		print(lat)
+		print(lon)
+		print(alt)
 	except:
 		print('No GPS_RAW_INT message received')
 	time.sleep(1)
