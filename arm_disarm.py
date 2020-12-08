@@ -12,7 +12,7 @@ master.wait_heartbeat()
 # https://mavlink.io/en/messages/common.html#MAV_CMD_COMPONENT_ARM_DISARM
 
 # Arm
-# master.arducopter_arm() or:
+master.arducopter_arm()
 # master.mav.command_long_send(
 #     master.target_system,
 #     master.target_component,
@@ -22,9 +22,9 @@ master.wait_heartbeat()
 
 # Disarm
 # master.arducopter_disarm() or:
-master.mav.command_long_send(
-    master.target_system,
-    master.target_component,
-    mavutil.mavlink.MAV_CMD_COMPONENT_ARM_DISARM,
-    0,
-    0, 0, 0, 0, 0, 0, 0)
+# master.mav.command_long_send(
+#     master.target_system,
+#     master.target_component,
+#     mavutil.mavlink.MAV_CMD_COMPONENT_ARM_DISARM,
+#     0,
+#     0, 0, 0, 0, 0, 0, 0)
