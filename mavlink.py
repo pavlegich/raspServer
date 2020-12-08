@@ -7,9 +7,6 @@ master = mavutil.mavlink_connection('udpin:0.0.0.0:14550')
 
 master.wait_heartbeat()
 
-# sudo mavproxy.py —master=/dev/ttyACM0,230400 —out=udpout:0.0.0.0:14550
-# sudo mavproxy.py —master=/dev/ttyACM0 —baudrate 921600 —aircraft MyCopter
-
 # while True:
 # 	try:
 # 		altitude = master.messages['GPS_RAW_INT']  # Note, you can access message fields as attributes!
