@@ -11,7 +11,7 @@ vehicle.wait_heartbeat()
 
 # GPS
 
-status = mavutil.messages("GPS_RAW_INT").satellites_visible
+status = vehicle.messages("GPS_RAW_INT").satellites_visible
 print(status)
 
 
