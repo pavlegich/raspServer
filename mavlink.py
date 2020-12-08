@@ -18,7 +18,7 @@ while True:
 		# print(lon)
 		# print(alt)
 		# print(latG)
-		print ("Global Location: %s" % master.location.global_frame)
+		print (master.location.global_frame)
 	except:
 		print('No GPS_RAW_INT message received')
 	time.sleep(1)
