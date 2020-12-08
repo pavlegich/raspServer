@@ -232,6 +232,10 @@
             dataType: 'json',
             success: function(data) {
               $("#time").text(data.time);
+              deleteMarkers();
+              addMarker("UAV", UAV, map);
+              addMarker("UAV2", UAV2, map);
+              addMarker("UAV3", UAV3, map);
               if (data.state == 1){
                 $('#errorAlert_uav').hide();
                 $("#X").text(Math.round(data.x*1e4)/1e4);
@@ -239,10 +243,6 @@
                 $("#Z").text(Math.round(data.z*1e4)/1e4);
 
                 var UAV = { lat: data.x, lng: data.y };
-                deleteMarkers();
-                addMarker("UAV", UAV, map);
-                addMarker("UAV2", UAV2, map);
-                addMarker("UAV3", UAV3, map);
               }
               else {
                 $('#errorAlert_uav').text("GPS signal is lost!").show();
