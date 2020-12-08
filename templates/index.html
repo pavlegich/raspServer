@@ -231,7 +231,7 @@
             url: '/status',
             dataType: 'json',
             success: function(data) {
-              if (data.status == 1){
+              if (data.state == 1){
                 $('#errorAlert_uav').hide();
                 $("#time").text(data.time);
                 $("#X").text(Math.round(data.x*1e4)/1e4);
