@@ -13,8 +13,8 @@ master.wait_heartbeat()
 
 # Arm
 master.arducopter_arm()
-status = master.messages['HIL_ACTUATOR_CONTROLS'].mode
-print(status)
+armed = master.motors_armed()
+print(armed)
 # master.mav.command_long_send(
 #     master.target_system,
 #     master.target_component,
@@ -23,7 +23,7 @@ print(status)
 #     1, 0, 0, 0, 0, 0, 0)
 
 # Disarm
-# master.arducopter_disarm() or:
+# master.arducopter_disarm()
 # master.mav.command_long_send(
 #     master.target_system,
 #     master.target_component,
