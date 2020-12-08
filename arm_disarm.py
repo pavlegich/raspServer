@@ -11,7 +11,7 @@ vehicle.wait_heartbeat()
 
 # GPS
 
-status = mavutil.mavlink.GPS_STATUS
+status = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200).GPS_STATUS
 print(status)
 
 
