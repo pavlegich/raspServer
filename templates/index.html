@@ -160,7 +160,7 @@
     let markers = [];
 
     function initMap() {
-      map = new google.maps.Map(document.getElementById("map"), {
+      map = new google.maps.Map(gid("map"), {
         center: { lat: 59.9574645, lng: 30.3083750 },
         zoom: 10
       });
@@ -187,7 +187,7 @@
     // gid("UAV2").innerText = "UAV2 predict: \n(" + {{UAV2["x1"]}} + ", " + {{UAV2["y1"]}} + "), (" + {{UAV2["x2"]}} + ", " + {{UAV2["y2"]}} + "), \n(" + {{UAV2["x3"]}} + ", " + {{UAV2["y3"]}} + ")";
     // gid("UAV3").innerText = "UAV3 predict: \n(" + {{UAV3["x1"]}} + ", " + {{UAV3["y1"]}} + "), (" + {{UAV3["x2"]}} + ", " + {{UAV3["y2"]}} + "), \n(" + {{UAV3["x3"]}} + ", " + {{UAV3["y3"]}} + ")";
 
-    var statusIntervalId = window.setInterval(update, 5000);
+    var statusIntervalId = window.setInterval(update, 1000);
 
     function update() {
         $.ajax({
@@ -250,7 +250,7 @@
               }
               else if (data.state == 0) {
                 $('#errorAlert_uav').hide();
-                $('#"warningAlert_uav"').text("GPS signal is not stable!").show();
+                $('#"warningAlert_uav"').text("GPS signal is unstable!").show();
               }
               else {
                 $('#warningAlert_uav').hide();

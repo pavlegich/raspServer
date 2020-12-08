@@ -131,7 +131,7 @@ def status():
 		return jsonify({'x' : UAV['x'], \
 			'y' : UAV['y'], \
 			'z' : UAV['z'], \
-			'state' : 0, 'time' : datetime.datetime.now()})
+			'state' : -1, 'time' : datetime.datetime.now()})
 
 @app.route('/manual_drive', methods=["GET"])
 @auth.login_required
