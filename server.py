@@ -1,18 +1,13 @@
 from flask import Flask, render_template, redirect, url_for, request, session, flash, jsonify, Response
 from flask_httpauth import HTTPDigestAuth
 from werkzeug.security import generate_password_hash, check_password_hash
-import time
-import datetime
-import random
+import time, datetime, random, cv2, threading
 from camera_pi import Camera
-# import numpy as np
-import cv2
-import threading
 
 # faceCascade = cv2.CascadeClassifier('Cascades/haarcascade_frontalface_default.xml')
 
 # ip_address = "192.168.43.210"
-ip_address = "192.168.1.102"
+ip_address = "192.168.1.103"
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hello'
 auth = HTTPDigestAuth()

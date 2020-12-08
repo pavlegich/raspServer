@@ -1,11 +1,8 @@
-import os
 from pymavlink import mavutil
 import time
 
 master = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
-# master = mavutil.mavlink_connection('udpin:0.0.0.0:14550')
 
-# Get some information !
 while True:
 	try:
 		master.wait_heartbeat()
