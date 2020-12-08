@@ -7,7 +7,7 @@ from pymavlink import mavutil
 # Create the connection
 vehicle = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
 # Wait a heartbeat before sending commands
-vehicle.wait_heartbeat()
+# vehicle.wait_heartbeat()
 
 # GPS
 
