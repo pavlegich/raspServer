@@ -50,6 +50,7 @@
 
             <div id="UAV" class="tabcontent">
               <div id="errorAlert_uav" class="alert alert-danger" role="alert" style="display: none; width: 100%; text-align: center;"></div>
+              <div id="warningAlert_uav" class="alert alert-warning" role="alert" style="display: none; width: 100%; text-align: center;"></div>
               <table class="xyz_red">
                 <tr>
                   <td>Latitide</td>
@@ -231,23 +232,30 @@
             url: '/status',
             dataType: 'json',
             success: function(data) {
+              UAV = { lat: data.x, lng: data.y };
               $("#time").text(data.time);
+
               deleteMarkers();
               addMarker("UAV", UAV, map);
               addMarker("UAV2", UAV2, map);
               addMarker("UAV3", UAV3, map);
-              if (data.state == 1){
-                $('#errorAlert_uav').hide();
-                $("#X").text(Math.round(data.x*1e4)/1e4);
-                $("#Y").text(Math.round(data.y*1e4)/1e4);
-                $("#Z").text(Math.round(data.z*1e4)/1e4);
 
-                UAV = { lat: data.x, lng: data.y };
+              $("#X").text(Math.round(data.x*1e4)/1e4);
+              $("#Y").text(Math.round(data.y*1e4)/1e4);
+              $("#Z").text(Math.round(data.z*1e4)/1e4);
+
+              if (data.state == -1){
+                $('#errorAlert_uav').text("GPS signal is lost!").show();
+                $('#warningAlert_uav').hide();
+              }
+              else if (data.state == 0) {
+                $('#errorAlert_uav').hide();
+                $('#"warningAlert_uav"').text("GPS signal is not stable!").show();
               }
               else {
-                $('#errorAlert_uav').text("GPS signal is lost!").show();
+                $('#warningAlert_uav').hide();
+                $('#errorAlert_uav').hide();
               }
-
             }
         })
     }
