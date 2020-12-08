@@ -17,17 +17,17 @@ vehicle = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
 # status = vehicle.recv_msg('GPS_STATUS')
 # print(status)
 
-location = vehicle.location()
-print(location.lat)
-print(location.lng)
-print(location.alt)
+# location = vehicle.location()
+# print(location.lat)
+# print(location.lng)
+# print(location.alt)
 
 # https://mavlink.io/en/messages/common.html#MAV_CMD_COMPONENT_ARM_DISARM
 
 # Arm
-# vehicle.arducopter_arm()
-# armed = vehicle.motors_armed()
-# print(armed)
+vehicle.arducopter_arm()
+armed = vehicle.motors_armed()
+print(armed)
 
 
 # master.mav.command_long_send(
