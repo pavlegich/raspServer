@@ -109,15 +109,15 @@ def status():
 		lat = master.messages['GPS_RAW_INT'].lat*1e-7  # Note, you can access message fields as attributes!
 		lon = master.messages['GPS_RAW_INT'].lon*1e-7
 		alt = master.messages['GPS_RAW_INT'].alt*1e-3
-		return jsonify{'x' : lat, \
+		return jsonify({'x' : lat, \
 			'y' : lon, \
 			'z' : alt, \
-			'state' : 1, 'time' : datetime.datetime.now()}
+			'state' : 1, 'time' : datetime.datetime.now()})
 	except:
-		return jsonify{'x' : lat, \
+		return jsonify({'x' : lat, \
 			'y' : lon, \
 			'z' : alt, \
-			'state' : 0, 'time' : datetime.datetime.now()}
+			'state' : 0, 'time' : datetime.datetime.now()})
 
 @app.route('/manual_drive', methods=["GET"])
 @auth.login_required
