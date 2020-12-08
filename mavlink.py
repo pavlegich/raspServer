@@ -13,9 +13,11 @@ while True:
 		lat = master.messages['GPS_RAW_INT'].lat*1e-7  # Note, you can access message fields as attributes!
 		lon = master.messages['GPS_RAW_INT'].lon*1e-7
 		alt = master.messages['GPS_RAW_INT'].alt*1e-3
+		latG = master.messages['GLOBAL_POSITION_INT'].lat*1e-7
 		print(lat)
 		print(lon)
 		print(alt)
+		print(latG)
 	except:
 		print('No GPS_RAW_INT message received')
 	time.sleep(1)
