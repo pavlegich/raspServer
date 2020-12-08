@@ -2,7 +2,7 @@
 Example of how to Arm and Disarm an Autopilot with pymavlink
 """
 # Import mavutil
-from pymavlink import mavutil
+from pymavlink import mavutil, mavextra
 
 # Create the connection
 vehicle = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
