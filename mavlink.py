@@ -3,12 +3,10 @@ from pymavlink import mavutil
 
 master = mavutil.mavlink_connection('udpin:0.0.0.0:14550')
 
-master.wait_heartbeat()
-
+# Get some information !
 while True:
 	try:
-		altitude = master.messages['GPS_RAW_INT'].alt  # Note, you can access message fields as attributes!
-		timestamp = master.time_since('GPS_RAW_INT')
-		print(altitude)
+		print(master.recv_match().to_dict())
 	except:
-		print('No GPS_RAW_INT message received')
+		pass
+	time.sleep(0.1)
