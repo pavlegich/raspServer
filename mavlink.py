@@ -1,5 +1,6 @@
 import os
-from pymavlink import mavutil 
+from pymavlink import mavutil
+import time
 
 master = mavutil.mavlink_connection('udpin:0.0.0.0:14550')
 
