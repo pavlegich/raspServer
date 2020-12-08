@@ -13,10 +13,12 @@ vehicle.wait_heartbeat()
 
 
 
-status = vehicle.recv_msg('GPS_STATUS')
-# messages("GPS_RAW_INT").satellites_visible
-print(status)
+# status = vehicle.recv_msg('GPS_STATUS')
+# print(status)
 
+
+location = vehicle.location()
+print(location)
 
 # https://mavlink.io/en/messages/common.html#MAV_CMD_COMPONENT_ARM_DISARM
 
