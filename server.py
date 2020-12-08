@@ -15,8 +15,6 @@ auth = HTTPDigestAuth()
 x1 = 60.03143
 y1 = 30.36020
 
-master = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
-
 users = {
     "admin": "admin"
 }
@@ -112,10 +110,11 @@ def latest_image():
 def status():
 	try:
 		state = 1
-		master.wait_heartbeat()
-		lat = master.messages['GPS_RAW_INT'].lat*1e-7  # Note, you can access message fields as attributes!
-		lon = master.messages['GPS_RAW_INT'].lon*1e-7
-		alt = master.messages['GPS_RAW_INT'].alt*1e-3
+		vehicle = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
+		vehicle.wait_heartbeat()
+		lat = vehicle.messages['GPS_RAW_INT'].lat*1e-7  # Note, you can access message fields as attributes!
+		lon = vehicle.messages['GPS_RAW_INT'].lon*1e-7
+		alt = vehicle.messages['GPS_RAW_INT'].alt*1e-3
 		if (lat == UAV['x'] and lon == UAV['y'] and alt == UAV['z']):
 			state = 0
 		UAV['x'] = lat

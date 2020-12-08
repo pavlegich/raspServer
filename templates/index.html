@@ -232,6 +232,7 @@
             dataType: 'json',
             success: function(data) {
               if (status == 1){
+                $('#errorAlert_uav').text("GPS signal is lost!").hide();
                 $("#time").text(data.time);
                 $("#X").text(Math.round(data.x*1e4)/1e4);
                 $("#Y").text(Math.round(data.y*1e4)/1e4);
