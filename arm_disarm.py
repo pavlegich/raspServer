@@ -13,7 +13,7 @@ master.wait_heartbeat()
 
 # Arm
 master.arducopter_arm()
-status = vehicle.messages['MAV_MODE_FLAG']
+status = master.messages['MAV_MODE_FLAG']
 print(status)
 # master.mav.command_long_send(
 #     master.target_system,
