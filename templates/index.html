@@ -233,7 +233,7 @@
                 $("#time").text(data.time);
                 $("#X").text(Math.round(data.x*1e4)/1e4);
                 $("#Y").text(Math.round(data.y*1e4)/1e4);
-                $("#Z").text(data.z);
+                $("#Z").text(Math.round(data.z*1e4)/1e4);
 
                 var UAV = { lat: data.x, lng: data.y };
                 deleteMarkers();
