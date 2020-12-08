@@ -12,7 +12,7 @@ master.wait_heartbeat()
 
 while True:
 	try:
-		altitude = master.messages['GPS_RAW_INT'].alt  # Note, you can access message fields as attributes!
+		altitude = master.messages['GPS_RAW_INT']  # Note, you can access message fields as attributes!
 		timestamp = master.time_since('GPS_RAW_INT')
 		print(altitude)
     except:
