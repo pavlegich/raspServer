@@ -3,6 +3,7 @@ from flask_httpauth import HTTPDigestAuth
 from werkzeug.security import generate_password_hash, check_password_hash
 import time, datetime, random, cv2, threading
 from camera_pi import Camera
+from pymavlink import mavutil
 
 # faceCascade = cv2.CascadeClassifier('Cascades/haarcascade_frontalface_default.xml')
 
@@ -13,6 +14,8 @@ app.config['SECRET_KEY'] = 'hello'
 auth = HTTPDigestAuth()
 x1 = 60.03143
 y1 = 30.36020
+
+master = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
 
 users = {
     "admin": "admin"
@@ -101,10 +104,20 @@ def latest_image():
 @app.route('/status', methods=["GET"])
 @auth.login_required
 def status():
-    return jsonify({'x' : random.uniform(59.974203, 59.973999), \
-			'y' : random.uniform(30.295013, 30.297577), \
-			'z' : round(random.uniform(15.0, 17.0), 2), \
-			'state' : 1, 'time' : datetime.datetime.now()})
+	try:
+		master.wait_heartbeat()
+		lat = master.messages['GPS_RAW_INT'].lat*1e-7  # Note, you can access message fields as attributes!
+		lon = master.messages['GPS_RAW_INT'].lon*1e-7
+		alt = master.messages['GPS_RAW_INT'].alt*1e-3
+		return jsonify{'x' : lat, \
+			'y' : lon, \
+			'z' : alt, \
+			'state' : 1, 'time' : datetime.datetime.now()}
+	except:
+		return jsonify{'x' : lat, \
+			'y' : lon, \
+			'z' : alt, \
+			'state' : 0, 'time' : datetime.datetime.now()}
 
 @app.route('/manual_drive', methods=["GET"])
 @auth.login_required
