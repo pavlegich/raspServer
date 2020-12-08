@@ -12,5 +12,5 @@ while True:
 		altitude = master.messages['GPS_RAW_INT'].alt  # Note, you can access message fields as attributes!
 		timestamp = master.time_since('GPS_RAW_INT')
 		print(altitude)
-    except:
+	except:
     	print('No GPS_RAW_INT message received')
