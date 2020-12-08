@@ -230,6 +230,7 @@
             url: '/status',
             dataType: 'json',
             success: function(data) {
+              if (status == 1){
                 $("#time").text(data.time);
                 $("#X").text(Math.round(data.x*1e4)/1e4);
                 $("#Y").text(Math.round(data.y*1e4)/1e4);
@@ -240,6 +241,10 @@
                 addMarker("UAV", UAV, map);
                 addMarker("UAV2", UAV2, map);
                 addMarker("UAV3", UAV3, map);
+              }
+              else {
+                $("#UAV").text('GPS Error');
+              }
 
             }
         })
