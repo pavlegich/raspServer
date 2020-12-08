@@ -10,9 +10,9 @@ master.wait_heartbeat()
 # Get some information !
 while True:
 	try:
-		lat = master.messages['GPS_RAW_INT'].lat*1e-2  # Note, you can access message fields as attributes!
-		lon = master.messages['GPS_RAW_INT'].lon*1e-2
-		alt = master.messages['GPS_RAW_INT'].alt*1e-2
+		lat = master.messages['GPS_RAW_INT'].lat*1e-7  # Note, you can access message fields as attributes!
+		lon = master.messages['GPS_RAW_INT'].lon*1e-7
+		alt = master.messages['GPS_RAW_INT'].alt*1e-4
 		print(lat)
 		print(lon)
 		print(alt)
