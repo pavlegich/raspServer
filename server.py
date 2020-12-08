@@ -15,7 +15,9 @@ auth = HTTPDigestAuth()
 x1 = 60.03143
 y1 = 30.36020
 
-vehicle = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
+# vehicle = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
+
+vehicle = mavutil.mavlink_connection('udpin:0.0.0.0:14550')
 
 users = {
     "admin": "admin"
