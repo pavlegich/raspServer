@@ -18,8 +18,8 @@ vehicle = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
 # print(status)
 
 
-location = vehicle.location()
-print(location)
+location = vehicle.location
+print(location.lat)
 
 # lat = vehicle.messages["GPS_RAW_INT"].lat
 # print(lat)
