@@ -5,16 +5,23 @@ Example of how to Arm and Disarm an Autopilot with pymavlink
 from pymavlink import mavutil
 
 # Create the connection
-master = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
+vehicle = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
 # Wait a heartbeat before sending commands
-master.wait_heartbeat()
+# master.wait_heartbeat()
+
+# GPS
+
+location = vehicle.location()
+print(location)
 
 # https://mavlink.io/en/messages/common.html#MAV_CMD_COMPONENT_ARM_DISARM
 
 # Arm
-master.arducopter_arm()
-armed = master.motors_armed()
-print(armed)
+# vehicle.arducopter_arm()
+# armed = vehicle.motors_armed()
+# print(armed)
+
+
 # master.mav.command_long_send(
 #     master.target_system,
 #     master.target_component,
