@@ -13,7 +13,7 @@ vehicle.wait_heartbeat()
 
 
 
-status = vehicle.recv_match(type='GPS_STATUS')
+status = vehicle.recv_match(type='GPS_STATUS', blocking=True)
 # messages("GPS_RAW_INT").satellites_visible
 print(status)
 
