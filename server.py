@@ -116,7 +116,7 @@ def status():
 		state = 1
 		location = vehicle.location()
 		lat = location.lat
-		lon = location.lon
+		lon = location.lng
 		alt = location.alt
 		if (lat == UAV['x'] and lon == UAV['y'] and alt == UAV['z']):
 			state = -1

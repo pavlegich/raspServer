@@ -19,7 +19,7 @@ vehicle = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
 
 location = vehicle.location()
 print(location.lat)
-print(location.lon)
+print(location.lng)
 print(location.alt)
 
 # https://mavlink.io/en/messages/common.html#MAV_CMD_COMPONENT_ARM_DISARM
