@@ -15,3 +15,4 @@ while True:
 		print(altitude)
 	except:
 		print('No GPS_RAW_INT message received')
+	time.sleep(1)
