@@ -4,7 +4,7 @@ import time
 
 master = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
 
-master.reboot_autopilot()
+master.wait_heartbeat()
 
 # Get some information !
 while True:
