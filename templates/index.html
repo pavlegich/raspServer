@@ -49,6 +49,7 @@
             </div>
 
             <div id="UAV" class="tabcontent">
+              <div id="errorAlert_uav" class="alert alert-danger" role="alert" style="display: none; width: 100%; text-align: center;"></div>
               <table class="xyz_red">
                 <tr>
                   <td>Latitide</td>
@@ -243,7 +244,7 @@
                 addMarker("UAV3", UAV3, map);
               }
               else {
-                $("#UAV").text('GPS Error');
+                $('errorAlert_uav').text("GPS signal is lost!").show();
               }
 
             }
