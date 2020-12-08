@@ -282,7 +282,7 @@
       });
     })
 
-    document.getElementById('UAV').style.display = "block";
+    gid('UAV').style.display = "block";
 
     function openPage(evt, name) {
       var i, tabcontent, tablinks;
@@ -294,7 +294,7 @@
       for (i = 0; i < tablinks.length; i++) {
           tablinks[i].className = tablinks[i].className.replace(" active", "");
       }
-      document.getElementById(name).style.display = "block";
+      document.gid(name).style.display = "block";
       evt.currentTarget.className += " active";
     }
   </script>
