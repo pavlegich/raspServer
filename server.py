@@ -112,10 +112,10 @@ def latest_image():
 def status():
 	try:
 		state = 1
-		vehicle.wait_heartbeat()
-		lat = vehicle.messages['GPS_RAW_INT'].lat*1e-7  # Note, you can access message fields as attributes!
-		lon = vehicle.messages['GPS_RAW_INT'].lon*1e-7
-		alt = vehicle.messages['GPS_RAW_INT'].alt*1e-3
+		location = vehicle.location()
+		lat = location.lat
+		lon = location.lon
+		alt = location.alt
 		if (lat == UAV['x'] and lon == UAV['y'] and alt == UAV['z']):
 			state = -1
 		elif (math.fabs(lat-UAV['x'])>0.0002 or math.fabs(lon-UAV['y'])>0.0002 or math.fabs(alt-UAV['z'])>2):

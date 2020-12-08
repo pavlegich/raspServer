@@ -12,7 +12,8 @@ vehicle = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
 # GPS
 
 location = vehicle.location()
-print(location.lat)
+print(location.heading)
+
 
 # https://mavlink.io/en/messages/common.html#MAV_CMD_COMPONENT_ARM_DISARM
 
