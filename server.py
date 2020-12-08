@@ -33,6 +33,12 @@ endpoint = {
 	"z" : 0
 }
 
+UAV = {
+	'x' : 0;
+	'y' : 0;
+	'z' : 0
+}
+
 UAV2 = {
 
 	"x1" : round(random.uniform(60.03158, 60.03160), 5),
@@ -105,14 +111,20 @@ def latest_image():
 @auth.login_required
 def status():
 	try:
+		state = 1
 		master.wait_heartbeat()
 		lat = master.messages['GPS_RAW_INT'].lat*1e-7  # Note, you can access message fields as attributes!
 		lon = master.messages['GPS_RAW_INT'].lon*1e-7
 		alt = master.messages['GPS_RAW_INT'].alt*1e-3
-		return jsonify({'x' : lat, \
-			'y' : lon, \
-			'z' : alt, \
-			'state' : 1, 'time' : datetime.datetime.now()})
+		if (lat == UAV['x'] && lon == UAV['y'] && alt == UAV['z']):
+			state = 0
+		UAV['x'] = lat
+		UAV['y'] = lon
+		UAV['z'] = alt
+		return jsonify({'x' : UAV['x'], \
+			'y' : UAV['y'], \
+			'z' : UAV['z'], \
+			'state' : state, 'time' : datetime.datetime.now()})
 	except:
 		return jsonify({'x' : lat, \
 			'y' : lon, \
