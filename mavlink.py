@@ -6,10 +6,10 @@ master = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
 
 master.reboot_autopilot()
 
-# # Get some information !
-# while True:
-# 	try:
-# 		print(master.recv_match().to_dict())
-# 	except:
-# 		pass
-# 	time.sleep(0.1)
+# Get some information !
+while True:
+	try:
+		print(master.recv_match().to_dict())
+	except:
+		pass
+	time.sleep(0.1)
