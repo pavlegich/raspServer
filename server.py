@@ -116,7 +116,7 @@ def status():
 		lat = master.messages['GPS_RAW_INT'].lat*1e-7  # Note, you can access message fields as attributes!
 		lon = master.messages['GPS_RAW_INT'].lon*1e-7
 		alt = master.messages['GPS_RAW_INT'].alt*1e-3
-		if (lat == UAV['x'] && lon == UAV['y'] && alt == UAV['z']):
+		if (lat == UAV['x'] and lon == UAV['y'] and alt == UAV['z']):
 			state = 0
 		UAV['x'] = lat
 		UAV['y'] = lon
