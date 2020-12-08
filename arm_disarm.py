@@ -8,7 +8,7 @@ from pymavlink import mavutil
 vehicle = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
 # vehicle = mavutil.mavlink_connection('udpin:0.0.0.0:14550')
 # Wait a heartbeat before sending commands
-# vehicle.wait_heartbeat()
+vehicle.wait_heartbeat()
 
 # GPS
 
@@ -18,11 +18,13 @@ vehicle = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
 # print(status)
 
 
+
+
+lat = vehicle.messages["GPS_RAW_INT"].lat
+print(lat)
+
 location = vehicle.location()
 print(location)
-
-# lat = vehicle.messages["GPS_RAW_INT"].lat
-# print(lat)
 
 # https://mavlink.io/en/messages/common.html#MAV_CMD_COMPONENT_ARM_DISARM
 
