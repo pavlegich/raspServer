@@ -125,9 +125,9 @@ def status():
 			'z' : UAV['z'], \
 			'state' : state, 'time' : datetime.datetime.now()})
 	except:
-		return jsonify({'x' : lat, \
-			'y' : lon, \
-			'z' : alt, \
+		return jsonify({'x' : UAV['x'], \
+			'y' : UAV['y'], \
+			'z' : UAV['z'], \
 			'state' : 0, 'time' : datetime.datetime.now()})
 
 @app.route('/manual_drive', methods=["GET"])
