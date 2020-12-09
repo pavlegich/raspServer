@@ -44,7 +44,7 @@
                 </button>
                 <button class="tablinks" onclick="openPage(event, 'UAV3')">UAV3
                 </button>
-                <button class="tablinks" onclick="openPage(event, 'getPoint')">End Point
+                <button id="get" class="tablinks" onclick="openPage(event, 'getPoint')">End Point
                 </button>
                 <button class="tablinks" onclick="openPage(event, 'setPoint')">Set
                 </button>
@@ -218,17 +218,6 @@
             }
         })
 
-        // $.ajax({
-        //     type: "GET",
-        //     url: '/getendpoint',
-        //     dataType: 'json',
-        //     success: function(data) {
-        //         $("#getX").text(Math.round(data.x*1e4)/1e4);
-        //         $("#getY").text(Math.round(data.y*1e4)/1e4);
-        //         $("#getZ").text(data.z);
-        //     }
-        // })
-
         $.ajax({
             type: "GET",
             url: '/status',
@@ -261,6 +250,19 @@
             }
         })
     }
+
+    $("#get").click(function(){
+      $.ajax({
+        type: "GET",
+        url: '/getendpoint',
+        dataType: 'json',
+        success: function(data) {
+          $("#getX").text(Math.round(data.x*1e4)/1e4);
+          $("#getY").text(Math.round(data.y*1e4)/1e4);
+          $("#getZ").text(data.z);
+        }
+      })
+    })
 
     $("#setendpoint").click(function(){
       $.ajax({
