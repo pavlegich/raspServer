@@ -120,7 +120,7 @@ def status():
 		alt = vehicle.messages["GPS_RAW_INT"].alt*1e-3
 		if (lat == UAV['x'] and lon == UAV['y'] and alt == UAV['z']):
 			state = -1
-		elif (abs(lat-UAV['x'])>0.000019 or abs(lon-UAV['y'])>0.000019 or abs(alt-UAV['z'])>2):
+		elif (abs(lat-UAV['x'])>0.000019 or abs(lon-UAV['y'])>0.000039 or abs(alt-UAV['z'])>2):
 			state = 0
 		UAV['x'] = lat
 		UAV['y'] = lon
