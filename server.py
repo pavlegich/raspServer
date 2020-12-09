@@ -121,7 +121,7 @@ def status():
 		sv = vehicle.messages['GPS_RAW_INT'].satellites_visible
 		if (sv == 0):
 			state = -1
-		elif (sv < 7):
+		elif (sv < 6):
 			state = 0
 		UAV['x'] = lat
 		UAV['y'] = lon
