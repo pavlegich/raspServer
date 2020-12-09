@@ -41,15 +41,7 @@ UAV = {
 	'z' : 0
 }
 
-UAV2 = {
-
-	"x1" : round(random.uniform(60.03158, 60.03160), 5),
-	"y1" : round(random.uniform(30.36010, 30.36011), 5),
-	"x2" : round(random.uniform(60.03161, 60.03163), 5),
-	"y2" : round(random.uniform(30.36012, 30.36014), 5),
-	"x3" : round(random.uniform(60.03164, 60.03167), 5),
-	"y3" : round(random.uniform(30.36013, 30.36015), 5)
-}
+UAV2 = []
 
 UAV3 = {
 	"x" : 60.03143,
@@ -98,10 +90,13 @@ def disarm():
 @app.route('/get_gps', methods=["GET"])
 @auth.login_required
 def get_gps():
-	return jsonify({'x' : random.uniform(59.973982, 59.973478), \
-			'y' : random.uniform(30.298140, 30.300297), \
-			'z' : round(random.uniform(15.0, 17.0), 2), \
-			'state' : 1, 'time' : datetime.datetime.now()})
+	x = random.uniform(59.973982, 59.973478)
+	y = random.uniform(30.298140, 30.300297)
+	z = random.uniform(15.0, 17.0)
+
+
+	return jsonify({'x' : x, 'y' : y, 'z' : z, \
+		'state' : 1, 'time' : datetime.datetime.now()})
 
 @app.route('/get_gps3', methods=["GET"])
 @auth.login_required
