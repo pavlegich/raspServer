@@ -117,11 +117,10 @@ def status():
 		t1 = time.time()
 		location = vehicle.location()
 		t2 = time.time()
-		print(t2-t1)
 		lat = location.lat
 		lon = location.lng
 		alt = location.alt
-		if (t2-t1>150):
+		if (t2-t1>1):
 			state = 0
 		elif (lat == UAV['x'] and lon == UAV['y'] and alt == UAV['z']):
 			state = -1
