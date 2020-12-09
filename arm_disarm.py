@@ -8,24 +8,8 @@ import time
 # Create the connection
 vehicle = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
 # vehicle = mavutil.mavlink_connection('udpin:0.0.0.0:14550')
-# Wait a heartbeat before sending commands
 
 
-# GPS
-
-
-while True:
-    vehicle.wait_heartbeat()
-    status = vehicle.messages['GPS_RAW_INT'].satellites_visible
-    print(status)
-    time.sleep(1)
-
-# location = vehicle.location()
-# print(location.lat)
-# print(location.lng)
-# print(location.alt)
-
-# https://mavlink.io/en/messages/common.html#MAV_CMD_COMPONENT_ARM_DISARM
 
 # Arm
 # vehicle.arducopter_arm()
