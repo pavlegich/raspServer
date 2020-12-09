@@ -14,7 +14,7 @@ vehicle.wait_heartbeat()
 
 
 
-status = vehicle.messages('GPS_RAW_INT')
+status = vehicle.messages['GPS_RAW_INT']
 print(status)
 
 # location = vehicle.location()
