@@ -118,20 +118,14 @@ def status():
 		lat = vehicle.messages["GPS_RAW_INT"].lat*1e-7
 		lon = vehicle.messages["GPS_RAW_INT"].lon*1e-7
 		alt = vehicle.messages["GPS_RAW_INT"].alt*1e-3
-		if (alt-UAV['z']>2.5):
+		if (lat-UAV['x']>0.0003 or lon-UAV['y']>0.0003 or alt-UAV['z']>2):
 			state = 0
 		elif (lat == UAV['x'] and lon == UAV['y'] and alt == UAV['z']):
 			state = -1
 		else:
-			t1 = time.time()
-			location = vehicle.location()
-			t2 = time.time()
-			lat = location.lat
-			lon = location.lng
-			alt = location.alt
-		UAV['x'] = lat
-		UAV['y'] = lon
-		UAV['z'] = alt
+			UAV['x'] = lat
+			UAV['y'] = lon
+			UAV['z'] = alt
 		return jsonify({'x' : UAV['x'], \
 			'y' : UAV['y'], \
 			'z' : UAV['z'], \
