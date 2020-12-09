@@ -15,7 +15,7 @@ vehicle.wait_heartbeat()
 
 
 while True:
-    status = vehicle.messages['GPS_RAW_INT']
+    status = vehicle.messages['GPS_RAW_INT'].satellites_visible
     print(status)
     time.sleep(1)
 
