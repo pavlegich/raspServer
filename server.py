@@ -114,6 +114,7 @@ def latest_image():
 def status():
 	try:
 		state = 1
+		vehicle.wait_heartbeat()
 		lat = vehicle.messages["GPS_RAW_INT"].lat*1e-7
 		lon = vehicle.messages["GPS_RAW_INT"].lon*1e-7
 		alt = vehicle.messages["GPS_RAW_INT"].alt
