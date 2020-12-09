@@ -120,7 +120,7 @@ def status():
 		lat = location.lat
 		lon = location.lng
 		alt = location.alt
-		if (t2-t1>1500):
+		if (t2-t1>150):
 			state = 0
 		elif (lat == UAV['x'] and lon == UAV['y'] and alt == UAV['z']):
 			state = -1
