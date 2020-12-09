@@ -14,6 +14,6 @@ while True:
     lat = vehicle.messages["GPS_RAW_INT"].lat*1e-7
     lon = vehicle.messages["GPS_RAW_INT"].lon*1e-7
     alt = vehicle.messages["GPS_RAW_INT"].alt*1e-3
-    new = mavextra.gps_newpos(lat, lon, 0, 10)
+    new = mavextra.gps_newpos(lat, lon, 0, 2)
     print(new)
 
