@@ -13,9 +13,9 @@ vehicle.wait_heartbeat()
 # GPS
 
 
-
-status = vehicle.messages['GPS_STATUS']
-print(status)
+while True:
+    status = vehicle.messages['GPS_RAW_INT'].satellites_visible
+    print(status)
 
 # location = vehicle.location()
 # print(location.lat)
