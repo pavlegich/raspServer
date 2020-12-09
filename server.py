@@ -92,7 +92,7 @@ def disarm():
 	status = False
 	vehicle.arducopter_disarm()
 	armed = vehicle.motors_armed()
-	if not armed: status = True
+	if (not armed): status = True
 	return jsonify({'status' : status})
 
 @app.route('/get_gps', methods=["GET"])
