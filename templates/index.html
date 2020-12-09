@@ -290,7 +290,7 @@
         url: "/arm"
       })
       .done(function(data){
-        if (data.status == "OK"){
+        if (data.status == true){
           $('#successAlert_arm').text("Motors armed!").show();
           $('#errorAlert_arm').hide();
           $(this).delay(5000).queue(function() {
@@ -315,7 +315,7 @@
         url: "/disarm"
       })
       .done(function(data){
-        if (data.status == "OK"){
+        if (data.status == true){
           $('#successAlert_arm').text("Motors disarmed!").show();
           $('#errorAlert_arm').hide();
           $(this).delay(5000).queue(function() {
