@@ -9,22 +9,27 @@ from scipy.interpolate import splrep, splev
 from pymavlink import mavutil
 import time
 
-vehicle = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
+# vehicle = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
 
-UAV = np.empty(shape=[0, 2])
+UAV = []
 
 # while True:
-vehicle.wait_heartbeat()
-lat = vehicle.messages["GPS_RAW_INT"].lat*1e-7
-lon = vehicle.messages["GPS_RAW_INT"].lon*1e-7
+# vehicle.wait_heartbeat()
+lat = 60.03151
+lon = 30.36011
 
-np.append(UAV, [[lat, lon]], axis = 0)
-time.sleep(2)
+lat1 = 60.03148
+lon1 = 30.3603
+
+while True:
+	if len(UAV)<6:
+		UAV.append([lat, lon])
+	else:
+		UAV.pop(0)
+		UAV.append([lat1, lon1])
+	time.sleep(2)
 
 
-
-
-print(UAV)
 
 
 # data = np.array([[60.03158, 30.36], [60.03151, 30.36011], [60.03148, 30.3603], [60.03147, 30.3605], [60.03154, 30.36071], [60.03148, 30.36081]])

@@ -93,10 +93,23 @@ def get_gps():
 	x = random.uniform(59.973982, 59.973478)
 	y = random.uniform(30.298140, 30.300297)
 	z = random.uniform(15.0, 17.0)
-
-
-	return jsonify({'x' : x, 'y' : y, 'z' : z, \
-		'state' : 1, 'time' : datetime.datetime.now()})
+	if len(UAV2)<6:
+		UAV2.append([x, y])
+	else:
+		UAV2.pop(0)
+		UAV2.append([x, y])
+	UAV2e = np.array(UAV2)
+	j = 5
+	step = np.diff(x[j-5:j+2]).mean()
+	x_extra = np.array([x[j]+step,x[j]+step*2,x[j]+step*3])
+	spl = splrep(x[j-5:j+2:2], y[j-5:j+2:2], k=1)
+	y_extra = splev(x_extra, spl)
+	main = {'x' : x, 'y' : y, 'z' : z, \
+		'state' : 1, 'time' : datetime.datetime.now()}
+	UAV2_extra = {'x1' : x_extra[0], 'y1' : y_extra[0],\
+	'x2' : x_extra[1], 'y2' : y_extra[1], 'x3' : x_extra[2], 'y3' : y_extra[2]}
+	data = [main, UAV2_extra]
+	return jsonify(GPS_data = data)
 
 @app.route('/get_gps3', methods=["GET"])
 @auth.login_required
