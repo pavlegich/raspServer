@@ -9,12 +9,13 @@ import time
 vehicle = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
 # vehicle = mavutil.mavlink_connection('udpin:0.0.0.0:14550')
 # Wait a heartbeat before sending commands
-vehicle.wait_heartbeat()
+
 
 # GPS
 
 
 while True:
+    vehicle.wait_heartbeat()
     status = vehicle.messages['GPS_RAW_INT'].satellites_visible
     print(status)
     time.sleep(1)
