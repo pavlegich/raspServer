@@ -77,7 +77,25 @@ def gen(camera):
 		frame = camera.get_frame()
 		yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
-@app.route('/get_gps')
+@app.route('/arm', methods=["POST"])
+@auth.login_required
+def arm():
+	status = False
+	vehicle.arducopter_arm()
+	armed = vehicle.motors_armed()
+	if armed: status = True
+	return jsonify({'status' : status})
+
+@app.route('/disarm', methods=["POST"])
+@auth.login_required
+def disarm():
+	status = False
+	vehicle.arducopter_disarm()
+	armed = vehicle.motors_armed()
+	if !armed: status = True
+	return jsonify({'status' : status})
+
+@app.route('/get_gps', methods=["GET"])
 @auth.login_required
 def get_gps():
 	return jsonify({'x' : random.uniform(59.973982, 59.973478), \
@@ -85,7 +103,7 @@ def get_gps():
 			'z' : round(random.uniform(15.0, 17.0), 2), \
 			'state' : 1, 'time' : datetime.datetime.now()})
 
-@app.route('/get_gps3')
+@app.route('/get_gps3', methods=["GET"])
 @auth.login_required
 def get_gps3():
 	return jsonify({'x' : random.uniform(59.974933, 59.974471), \
@@ -94,17 +112,17 @@ def get_gps3():
 			'state' : 1, 'time' : datetime.datetime.now()})
 
 
-@app.route('/video_feed')
+@app.route('/video_feed', methods=["GET"])
 @auth.login_required
 def video_feed():
 	return Response(gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route('/image')
+@app.route('/image', methods=["GET"])
 @auth.login_required
 def image():
 	return Response(gen_img(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route('/latest_image')
+@app.route('/latest_image', methods=["GET"])
 @auth.login_required
 def latest_image():
 	return render_template("latest_image.html")

@@ -27,11 +27,13 @@
                 style="width: 320px; height: 240px; border: 1px solid #8B4513;">
           </div>
           <br>
-          <div align="center">
+          <div align="center" style="height: 300px;">
             <p><input type="button" value="Arm" id="arm" />
-            <input type="button" value="Disarm" id="disarm" /></p>
-            <p><input type="button" value="Up" id="up" />
+            <input type="button" value="Disarm" id="disarm" />
+            <input type="button" value="Up" id="up" />
             <input type="button" value="Down" id="down" /></p>
+            <div id="successAlert_arm" class="alert alert-success" role="alert" style="display: none; width: 100%; text-align: center;"></div>
+            <div id="errorAlert_arm" class="alert alert-danger" role="alert" style="display: none; width: 100%; text-align: center;"></div>
           </div>
 
           <div align="middle">
@@ -276,6 +278,56 @@
           $('#errorAlert_set').hide();
           $(this).delay(5000).queue(function() {
             $('#successAlert_set').hide();
+            $(this).dequeue();
+          });
+        }
+      });
+    })
+
+    $("#arm").click(function(){
+      $.ajax({
+        method: "POST",
+        url: "/arm"
+      })
+      .done(function(data){
+        if (data.status == "OK"){
+          $('#successAlert_arm').text("Motors armed!").show();
+          $('#errorAlert_arm').hide();
+          $(this).delay(5000).queue(function() {
+            $('#successAlert_arm').hide();
+            $(this).dequeue();
+          });
+        }
+        else{
+          $('#errorAlert_arm').text("Arm error!").show();
+          $('#successAlert_arm').hide();
+          $(this).delay(5000).queue(function() {
+            $('#errorAlert_arm').hide();
+            $(this).dequeue();
+          });
+        }
+      });
+    })
+
+    $("#disarm").click(function(){
+      $.ajax({
+        method: "POST",
+        url: "/disarm"
+      })
+      .done(function(data){
+        if (data.status == "OK"){
+          $('#successAlert_arm').text("Motors disarmed!").show();
+          $('#errorAlert_arm').hide();
+          $(this).delay(5000).queue(function() {
+            $('#successAlert_arm').hide();
+            $(this).dequeue();
+          });
+        }
+        else{
+          $('#errorAlert_arm').text("Disarm error!").show();
+          $('#successAlert_arm').hide();
+          $(this).delay(5000).queue(function() {
+            $('#errorAlert_arm').hide();
             $(this).dequeue();
           });
         }
