@@ -39,10 +39,10 @@ body {
   font-weight: normal;
 }
 
-.xyz_orange tr td{
+.xyz_green tr td{
   min-width: 100px;
   text-align: center;
-  color: orange;
+  color: green;
   font-size: 13pt;
   font-family: Verdana;
   font-weight: normal;
