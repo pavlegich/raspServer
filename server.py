@@ -114,13 +114,15 @@ def latest_image():
 def status():
 	try:
 		state = 1
+		t1 = time.time()
 		location = vehicle.location()
+		t2 = time.time()
 		lat = location.lat
 		lon = location.lng
 		alt = location.alt
 		if (lat == UAV['x'] and lon == UAV['y'] and alt == UAV['z']):
 			state = -1
-		elif (math.fabs(lat-UAV['x'])>0.0002 or math.fabs(lon-UAV['y'])>0.0002 or math.fabs(alt-UAV['z'])>2):
+		elif (t2-t1>1500):
 			state = 0
 		UAV['x'] = lat
 		UAV['y'] = lon
