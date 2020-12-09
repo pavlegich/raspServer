@@ -3,6 +3,7 @@ Example of how to Arm and Disarm an Autopilot with pymavlink
 """
 # Import mavutil
 from pymavlink import mavutil
+import time
 
 # Create the connection
 vehicle = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
@@ -16,6 +17,7 @@ vehicle.wait_heartbeat()
 while True:
     status = vehicle.messages['GPS_RAW_INT'].satellites_visible
     print(status)
+    time.sleep(1)
 
 # location = vehicle.location()
 # print(location.lat)
