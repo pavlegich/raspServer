@@ -113,8 +113,6 @@
             </div>
 
             <div id="setPoint" class="tabcontent">
-              <div id="successAlert_set" class="alert alert-success" role="alert" style="display: none; width: 100%; text-align: center;"></div>
-              <div id="errorAlert_set" class="alert alert-danger" role="alert" style="display: none; width: 100%; text-align: center;"></div>
               <table>
                 <tr>
                   <td style="text-align: right;">Latitide:</td>
@@ -129,7 +127,10 @@
                   <td><input type="text" id="setZ" style="height: 24px;"/></td>
                 </tr>
                 <tr>
-                  <td></td>
+                  <td>
+                    <div id="successAlert_set" class="alert alert-success" role="alert" style="display: none; width: 100%; text-align: center;"></div>
+                    <div id="errorAlert_set" class="alert alert-danger" role="alert" style="display: none; width: 100%; text-align: center;"></div>
+                  </td>
                   <td align="right">
                     <input id="setendpoint" type="button" value="Submit"/></td>
                 </tr>
