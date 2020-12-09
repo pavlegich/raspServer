@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, request, session, flash, jsonify, Response
 from flask_httpauth import HTTPDigestAuth
 from werkzeug.security import generate_password_hash, check_password_hash
-import time, datetime, random, cv2, threading, math
+import time, datetime, random, cv2, threading
 from camera_pi import Camera
 from pymavlink import mavutil
 
@@ -120,7 +120,7 @@ def status():
 		alt = vehicle.messages["GPS_RAW_INT"].alt*1e-3
 		if (lat == UAV['x'] and lon == UAV['y'] and alt == UAV['z']):
 			state = -1
-		elif (lat-UAV['x']>0.0003 or lon-UAV['y']>0.0003 or alt-UAV['z']>2):
+		elif (abs(lat-UAV['x'])>0.000019 or abs(lon-UAV['y'])>0.000019 or abs(alt-UAV['z'])>2):
 			state = 0
 		UAV['x'] = lat
 		UAV['y'] = lon
