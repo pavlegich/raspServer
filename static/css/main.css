@@ -25,7 +25,7 @@ body {
   min-width: 100px;
   text-align: center;
   color: #DC143C;
-  font-size: 12pt;
+  font-size: 13pt;
   font-family: Verdana;
   font-weight: normal;
 }
@@ -34,7 +34,7 @@ body {
   min-width: 100px;
   text-align: center;
   color: #8B008B;
-  font-size: 14pt;
+  font-size: 13pt;
   font-family: Verdana;
   font-weight: normal;
 }
@@ -43,14 +43,14 @@ body {
   min-width: 100px;
   text-align: center;
   color: orange;
-  font-size: 14pt;
+  font-size: 13pt;
   font-family: Verdana;
   font-weight: normal;
 }
 
 .tab {
   overflow: hidden;
-  margin-top: 14px;
+  margin-top: 13px;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
 }
