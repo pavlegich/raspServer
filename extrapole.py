@@ -48,11 +48,6 @@ while True:
 # y_extra = splev(x_extra, spl)
 # plt.plot (x_extra, y_extra, '.'+'--')
 
-# plt.show()
-
-
-# In[ ]:
-
 
 
 
