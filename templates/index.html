@@ -128,10 +128,8 @@
                 </tr>
                 <tr>
                   <td></td>
-                  <td>
-                    <p><div id="successAlert_set" class="alert alert-success" role="alert" style="display: none; width: 50%; text-align: center; margin-left: 0;"></div>
-                    <div id="errorAlert_set" class="alert alert-danger" role="alert" style="display: none; width: 50%; text-align: center; margin-left: 0;"></div>
-                    <input id="setendpoint" type="button" value="Submit"/></td></p>
+                  <td align="right">
+                    <input id="setendpoint" type="button" value="Submit"/></td>
                 </tr>
               </table>
             </div>
@@ -276,10 +274,10 @@
       })
       .done(function(data){
         if (data.status == "OK"){
-          $('#successAlert_set').text("Coordinates are set!").show();
-          $('#errorAlert_set').hide();
+          $('#successAlert_arm').text("Coordinates are set!").show();
+          $('#errorAlert_arm').hide();
           $(this).delay(5000).queue(function() {
-            $('#successAlert_set').hide();
+            $('#successAlert_arm').hide();
             $(this).dequeue();
           });
         }
