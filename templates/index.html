@@ -195,9 +195,9 @@
             url: '/get_gps',
             dataType: 'json',
             success: function(data) {
-                $("#X2").text(Math.round(data.main.x*1e4)/1e4);
-                $("#Y2").text(Math.round(data.main.y*1e4)/1e4);
-                $("#Z2").text(Math.round(data.main.z*1e2)/1e2);
+                $("#X2").text(Math.round(data.x*1e4)/1e4);
+                $("#Y2").text(Math.round(data.y*1e4)/1e4);
+                $("#Z2").text(Math.round(data.z*1e2)/1e2);
 
 
                 UAV2 = { lat: data.x, lng: data.y };
