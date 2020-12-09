@@ -122,10 +122,9 @@ def status():
 			state = -1
 		elif (lat-UAV['x']>0.0003 or lon-UAV['y']>0.0003 or alt-UAV['z']>2):
 			state = 0
-		else:
-			UAV['x'] = lat
-			UAV['y'] = lon
-			UAV['z'] = alt
+		UAV['x'] = lat
+		UAV['y'] = lon
+		UAV['z'] = alt
 		return jsonify({'x' : UAV['x'], \
 			'y' : UAV['y'], \
 			'z' : UAV['z'], \
