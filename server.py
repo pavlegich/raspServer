@@ -117,6 +117,7 @@ def status():
 		t1 = time.time()
 		location = vehicle.location()
 		t2 = time.time()
+		print(t2-t1)
 		lat = location.lat
 		lon = location.lng
 		alt = location.alt
