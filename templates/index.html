@@ -187,7 +187,7 @@
     // gid("UAV2").innerText = "UAV2 predict: \n(" + {{UAV2["x1"]}} + ", " + {{UAV2["y1"]}} + "), (" + {{UAV2["x2"]}} + ", " + {{UAV2["y2"]}} + "), \n(" + {{UAV2["x3"]}} + ", " + {{UAV2["y3"]}} + ")";
     // gid("UAV3").innerText = "UAV3 predict: \n(" + {{UAV3["x1"]}} + ", " + {{UAV3["y1"]}} + "), (" + {{UAV3["x2"]}} + ", " + {{UAV3["y2"]}} + "), \n(" + {{UAV3["x3"]}} + ", " + {{UAV3["y3"]}} + ")";
 
-    var statusIntervalId = window.setInterval(update, 1000);
+    var statusIntervalId = window.setInterval(update, 2000);
 
     function update() {
         $.ajax({
@@ -216,16 +216,16 @@
             }
         })
 
-        $.ajax({
-            type: "GET",
-            url: '/getendpoint',
-            dataType: 'json',
-            success: function(data) {
-                $("#getX").text(Math.round(data.x*1e4)/1e4);
-                $("#getY").text(Math.round(data.y*1e4)/1e4);
-                $("#getZ").text(data.z);
-            }
-        })
+        // $.ajax({
+        //     type: "GET",
+        //     url: '/getendpoint',
+        //     dataType: 'json',
+        //     success: function(data) {
+        //         $("#getX").text(Math.round(data.x*1e4)/1e4);
+        //         $("#getY").text(Math.round(data.y*1e4)/1e4);
+        //         $("#getZ").text(data.z);
+        //     }
+        // })
 
         $.ajax({
             type: "GET",
