@@ -58,8 +58,8 @@ def gen(camera):
 @auth.login_required
 def arm():
 	status = False
-	# vehicle.arducopter_arm()
-	vehicle.armed = True
+	vehicle.arducopter_arm()
+	# vehicle.armed = True
 	armed = vehicle.motors_armed()
 	if armed: status = True
 	return jsonify({'status' : status})
@@ -68,8 +68,8 @@ def arm():
 @auth.login_required
 def disarm():
 	status = False
-	# vehicle.arducopter_disarm()
-	vehicle.armed = False
+	vehicle.arducopter_disarm()
+	# vehicle.armed = False
 	armed = vehicle.motors_armed()
 	if (not armed): status = True
 	return jsonify({'status' : status})
