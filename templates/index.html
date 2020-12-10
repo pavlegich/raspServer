@@ -292,6 +292,11 @@
               addMarker("UAV2", UAV2, map);
               addMarker("UAV3", UAV3, map);
               addExtra("2", { lat: UAV2_extra["lat1"], lng: UAV2_extra["lng1"] }, map);
+              addExtra("2", { lat: UAV2_extra["lat2"], lng: UAV2_extra["lng2"] }, map);
+              addExtra("2", { lat: UAV2_extra["lat3"], lng: UAV2_extra["lng3"] }, map);
+              addExtra("3", { lat: UAV3_extra["lat1"], lng: UAV3_extra["lng1"] }, map);
+              addExtra("3", { lat: UAV3_extra["lat2"], lng: UAV3_extra["lng2"] }, map);
+              addExtra("3", { lat: UAV3_extra["lat3"], lng: UAV3_extra["lng3"] }, map);
 
               $("#X").text(Math.round(data.x*1e4)/1e4);
               $("#Y").text(Math.round(data.y*1e4)/1e4);
