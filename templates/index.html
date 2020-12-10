@@ -79,6 +79,18 @@
                   <td><div id="Y2"></div></td>
                   <td><div id="Z2"></div></td>
                 </tr>
+                <tr>
+                  <td><div id="X2_extra1"></div></td>
+                  <td><div id="Y2_extra1"></div></td>
+                </tr>
+                <tr>
+                  <td><div id="X2_extra2"></div></td>
+                  <td><div id="Y2_extra2"></div></td>
+                </tr>
+                <tr>
+                  <td><div id="X2_extra3"></div></td>
+                  <td><div id="Y2_extra3"></div></td>
+                </tr>
               </table>
             </div>
 
@@ -200,9 +212,10 @@
                 $("#Y2").text(Math.round(data.y*1e4)/1e4);
                 $("#Z2").text(Math.round(data.z*1e2)/1e2);
 
-
                 UAV2 = { lat: data.x, lng: data.y };
                 UAV2_extra = { lat1: data.lat1, lng1: data.lon1, lat2: data.lat2, lng2: data.lon2, lat3: data.lat3, lng3: data.lon3 };
+
+                $("#X2_extra1").text(UAV2_extra["lat1"]);
             }
         })
 
