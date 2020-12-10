@@ -32,9 +32,9 @@ def get_pw(username):
     return None
 
 endpoint = {
-	"lat" : 0,
-	"lon" : 0,
-	"alt" : 0
+	"lat" : None,
+	"lon" : None,
+	"alt" : None
 }
 
 myUAV = {
