@@ -32,9 +32,9 @@ def get_pw(username):
     return None
 
 endpoint = {
-	"lat" : None,
-	"lon" : None,
-	"alt" : None
+	"lat" : 0,
+	"lon" : 0,
+	"alt" : 0
 }
 
 myUAV = {
@@ -140,7 +140,7 @@ def status():
 		myUAV['lat'] = lat
 		myUAV['lon'] = lon
 		myUAV['alt'] = alt
-		return jsonify({'lat' : lat, 'lon' : lon, 'alt' : alt, \
+		return jsonify({'lat' : myUAV['lat'], 'lon' : myUAV['lon'], 'alt' : myUAV['alt'], \
 			'state' : state, 'time' : datetime.datetime.now()})
 	except:
 		return jsonify({'lat' : myUAV['lat'], 'lon' : myUAV['lon'], \
