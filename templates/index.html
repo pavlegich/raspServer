@@ -215,7 +215,13 @@
                 UAV2 = { lat: data.x, lng: data.y };
                 UAV2_extra = { lat1: data.lat1, lng1: data.lon1, lat2: data.lat2, lng2: data.lon2, lat3: data.lat3, lng3: data.lon3 };
 
-                $("#X2_extra1").text(UAV2_extra["lat1"]);
+                $("#X2_extra1").text(Math.round(UAV2_extra["lat1"]*1e4)/1e4);
+                $("#Y2_extra1").text(Math.round(UAV2_extra["lng1"]*1e4)/1e4);
+                $("#X2_extra2").text(Math.round(UAV2_extra["lat2"]*1e4)/1e4);
+                $("#Y2_extra2").text(Math.round(UAV2_extra["lng2"]*1e4)/1e4);
+                $("#X2_extra3").text(Math.round(UAV2_extra["lat3"]*1e4)/1e4);
+                $("#Y2_extra3").text(Math.round(UAV2_extra["lng3"]*1e4)/1e4);
+
             }
         })
 

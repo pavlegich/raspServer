@@ -101,8 +101,8 @@ def get_gps():
 	else:
 		UAV2.pop(0)
 		UAV2.append([x, y])
-	
-	UAV2e = np.array(UAV2)
+		UAV2e = np.array(UAV2)
+		
 	lat = np.array(UAV2e[:,0])
 	lon = np.array(UAV2e[:,1])
 	lon_sort = np.sort(lon)
@@ -112,6 +112,8 @@ def get_gps():
 	lon_extra = np.array([lon[j]+step,lon[j]+step*2,lon[j]+step*3])
 	spl = splrep(lon_sort[(j-5):(j+2):2], lat[(j-5):(j+2):2], k=1)
 	lat_extra = splev(lon_extra, spl)
+	
+	
 
 	return jsonify({'x' : x, 'y' : y, 'z' : z, \
 		'state' : 1, 'time' : datetime.datetime.now(), \
