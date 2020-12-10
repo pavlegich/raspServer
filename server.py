@@ -93,23 +93,29 @@ def get_gps():
 	x = random.uniform(59.973982, 59.973478)
 	y = random.uniform(30.298140, 30.300297)
 	z = random.uniform(15.0, 17.0)
-	# if len(UAV2)<6:
-	# 	UAV2.append([x, y])
-	# else:
-	# 	UAV2.pop(0)
-	# 	UAV2.append([x, y])
-	# UAV2e = np.array(UAV2)
-	# j = 5
-	# step = np.diff(x[j-5:j+2]).mean()
-	# x_extra = np.array([x[j]+step,x[j]+step*2,x[j]+step*3])
-	# spl = splrep(x[j-5:j+2:2], y[j-5:j+2:2], k=1)
-	# y_extra = splev(x_extra, spl)
-	main = {'x' : x, 'y' : y, 'z' : z, \
-		'state' : 1, 'time' : datetime.datetime.now()}
-	# UAV2_extra = {'x1' : x_extra[0], 'y1' : y_extra[0],\
-	# 'x2' : x_extra[1], 'y2' : y_extra[1], 'x3' : x_extra[2], 'y3' : y_extra[2]}
-	data = [main]
-	return jsonify(data = data)
+	
+	if len(UAV2)<6:
+		UAV2.append([lat, lon])
+	else:
+		UAV2.pop(0)
+		UAV2.append([lat, lon])
+	
+	UAV2e = np.array(UAV2)
+	lat = np.array(UAV2e[:,0])
+	lon = np.array(UAV2e[:,1])
+	lon_sort = np.sort(lon)
+	j = len(UAV2e) - 1
+
+	step = np.diff(lon[(j-5):(j+2)]).mean()
+	lon_extra = np.array([lon[j]+step,lon[j]+step*2,lon[j]+step*3])
+	spl = splrep(lon_sort[(j-5):(j+2):2], lat[(j-5):(j+2):2], k=1)
+	lat_extra = splev(x_extra, spl)
+
+	return jsonify({'x' : x, 'y' : y, 'z' : z, \
+		'state' : 1, 'time' : datetime.datetime.now(), \
+		'lat1' : lat_extra[0], 'lon1' : lon_extra[0], \
+		'lat2' : lat_extra[1], 'lon2' : lon_extra[1], \
+		'lat3' : lat_extra[2], 'lon3' : lon_extra[2]})
 
 @app.route('/get_gps3', methods=["GET"])
 @auth.login_required

@@ -154,6 +154,7 @@
 
     var UAV = { lat: 0, lng: 0 };
     var UAV2 = { lat: 0, lng: 0 };
+    var UAV2_extra = { lat1: 0, lng1: 0, lat2: 0, lng2: 0, lat3: 0, lng3: 0 };
     var UAV3 = { lat: 0, lng: 0 };
 
     let map;
@@ -195,12 +196,13 @@
             url: '/get_gps',
             dataType: 'json',
             success: function(data) {
-                // $("#X2").text(Math.round(data.main['x']*1e4)/1e4);
-                // $("#Y2").text(Math.round(data.main['y']*1e4)/1e4);
-                // $("#Z2").text(Math.round(data.main['z']*1e2)/1e2);
+                $("#X2").text(Math.round(data.main['x']*1e4)/1e4);
+                $("#Y2").text(Math.round(data.main['y']*1e4)/1e4);
+                $("#Z2").text(Math.round(data.main['z']*1e2)/1e2);
 
 
                 UAV2 = { lat: data.x, lng: data.y };
+                UAV2_extra = { lat1: data.lat1, lng1: data.lon1, lat2: data.lat2, lng2: data.lon2, lat3: data.lat3, lng3: data.lon3 };
             }
         })
 
