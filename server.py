@@ -11,6 +11,8 @@ from scipy.interpolate import splrep, splev
 
 # ip_address = "192.168.43.210"
 ip_address = "192.168.1.103"
+ip2 = "/status"
+ip3 = "/status"
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hello'
 auth = HTTPDigestAuth()
@@ -56,7 +58,8 @@ def gen(camera):
 @auth.login_required
 def arm():
 	status = False
-	vehicle.arducopter_arm()
+	# vehicle.arducopter_arm()
+	vehicle.armed = True
 	armed = vehicle.motors_armed()
 	if armed: status = True
 	return jsonify({'status' : status})
@@ -65,7 +68,8 @@ def arm():
 @auth.login_required
 def disarm():
 	status = False
-	vehicle.arducopter_disarm()
+	# vehicle.arducopter_disarm()
+	vehicle.armed = False
 	armed = vehicle.motors_armed()
 	if (not armed): status = True
 	return jsonify({'status' : status})
@@ -82,7 +86,7 @@ def get_gps():
 		x = random.uniform(59.974933, 59.974471)
 		y = random.uniform(30.297115, 30.299476)
 		z = random.uniform(20.0, 30.0)
-	print(i)
+
 	UAV[i].pop(0)
 	UAV[i].append([x, y])
 	UAVe = np.array(UAV[i])
