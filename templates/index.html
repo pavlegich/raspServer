@@ -186,18 +186,18 @@
     gid("Z").textContent = 0;
     gid("time").textContent = 0;
 
-    var UAV = { lat: 0, lng: 0 };
-    var UAV2 = { lat: 0, lng: 0 };
-    var UAV2_extra = { lat1: 0, lng1: 0, lat2: 0, lng2: 0, lat3: 0, lng3: 0 };
-    var UAV3 = { lat: 0, lng: 0 };
-    var UAV3_extra = { lat1: 0, lng1: 0, lat2: 0, lng2: 0, lat3: 0, lng3: 0 };
+    var UAV = { lat: 0, lon: 0 };
+    var UAV2 = { lat: 0, lon: 0 };
+    var UAV2_extra = { lat1: 0, lon1: 0, lat2: 0, lon2: 0, lat3: 0, lon3: 0 };
+    var UAV3 = { lat: 0, lon: 0 };
+    var UAV3_extra = { lat1: 0, lon1: 0, lat2: 0, lon2: 0, lat3: 0, lon3: 0 };
 
     let map;
     let markers = [];
 
     function initMap() {
       map = new google.maps.Map(gid("map"), {
-        center: { lat: 59.9574645, lng: 30.3083750 },
+        center: { lat: 59.9574645, lon: 30.3083750 },
         zoom: 10
       });
     }
@@ -244,15 +244,15 @@
                 $("#Y2").text(Math.round(data.y*1e4)/1e4);
                 $("#Z2").text(Math.round(data.z*1e2)/1e2);
 
-                UAV2 = { lat: data.x, lng: data.y };
-                UAV2_extra = { lat1: data.lat1, lng1: data.lon1, lat2: data.lat2, lng2: data.lon2, lat3: data.lat3, lng3: data.lon3 };
+                UAV2 = { lat: data.x, lon: data.y };
+                UAV2_extra = { lat1: data.lat1, lon1: data.lon1, lat2: data.lat2, lon2: data.lon2, lat3: data.lat3, lon3: data.lon3 };
 
                 $("#X2_extra1").text(Math.round(UAV2_extra["lat1"]*1e4)/1e4);
-                $("#Y2_extra1").text(Math.round(UAV2_extra["lng1"]*1e4)/1e4);
+                $("#Y2_extra1").text(Math.round(UAV2_extra["lon1"]*1e4)/1e4);
                 $("#X2_extra2").text(Math.round(UAV2_extra["lat2"]*1e4)/1e4);
-                $("#Y2_extra2").text(Math.round(UAV2_extra["lng2"]*1e4)/1e4);
+                $("#Y2_extra2").text(Math.round(UAV2_extra["lon2"]*1e4)/1e4);
                 $("#X2_extra3").text(Math.round(UAV2_extra["lat3"]*1e4)/1e4);
-                $("#Y2_extra3").text(Math.round(UAV2_extra["lng3"]*1e4)/1e4);
+                $("#Y2_extra3").text(Math.round(UAV2_extra["lon3"]*1e4)/1e4);
             }
         })
 
@@ -267,15 +267,15 @@
                 $("#Y3").text(Math.round(data.y*1e4)/1e4);
                 $("#Z3").text(Math.round(data.z*1e2)/1e2);
 
-                UAV3 = { lat: data.x, lng: data.y };
-                UAV3_extra = { lat1: data.lat1, lng1: data.lon1, lat2: data.lat2, lng2: data.lon2, lat3: data.lat3, lng3: data.lon3 };
+                UAV3 = { lat: data.x, lon: data.y };
+                UAV3_extra = { lat1: data.lat1, lon1: data.lon1, lat2: data.lat2, lon2: data.lon2, lat3: data.lat3, lon3: data.lon3 };
 
                 $("#X3_extra1").text(Math.round(UAV3_extra["lat1"]*1e4)/1e4);
-                $("#Y3_extra1").text(Math.round(UAV3_extra["lng1"]*1e4)/1e4);
+                $("#Y3_extra1").text(Math.round(UAV3_extra["lon1"]*1e4)/1e4);
                 $("#X3_extra2").text(Math.round(UAV3_extra["lat2"]*1e4)/1e4);
-                $("#Y3_extra2").text(Math.round(UAV3_extra["lng2"]*1e4)/1e4);
+                $("#Y3_extra2").text(Math.round(UAV3_extra["lon2"]*1e4)/1e4);
                 $("#X3_extra3").text(Math.round(UAV3_extra["lat3"]*1e4)/1e4);
-                $("#Y3_extra3").text(Math.round(UAV3_extra["lng3"]*1e4)/1e4);
+                $("#Y3_extra3").text(Math.round(UAV3_extra["lon3"]*1e4)/1e4);
             }
         })
 
@@ -284,23 +284,23 @@
             url: '/status',
             dataType: 'json',
             success: function(data) {
-              UAV = { lat: data.x, lng: data.y };
+              UAV = { lat: data.lat, lon: data.lon };
               $("#time").text(data.time);
 
               deleteMarkers();
               addMarker("UAV", UAV, map);
               addMarker("UAV2", UAV2, map);
               addMarker("UAV3", UAV3, map);
-              addExtra("2", { lat: UAV2_extra["lat1"], lng: UAV2_extra["lng1"] }, map);
-              addExtra("2", { lat: UAV2_extra["lat2"], lng: UAV2_extra["lng2"] }, map);
-              addExtra("2", { lat: UAV2_extra["lat3"], lng: UAV2_extra["lng3"] }, map);
-              addExtra("3", { lat: UAV3_extra["lat1"], lng: UAV3_extra["lng1"] }, map);
-              addExtra("3", { lat: UAV3_extra["lat2"], lng: UAV3_extra["lng2"] }, map);
-              addExtra("3", { lat: UAV3_extra["lat3"], lng: UAV3_extra["lng3"] }, map);
+              addExtra("2", { lat: UAV2_extra["lat1"], lon: UAV2_extra["lon1"] }, map);
+              addExtra("2", { lat: UAV2_extra["lat2"], lon: UAV2_extra["lon2"] }, map);
+              addExtra("2", { lat: UAV2_extra["lat3"], lon: UAV2_extra["lon3"] }, map);
+              addExtra("3", { lat: UAV3_extra["lat1"], lon: UAV3_extra["lon1"] }, map);
+              addExtra("3", { lat: UAV3_extra["lat2"], lon: UAV3_extra["lon2"] }, map);
+              addExtra("3", { lat: UAV3_extra["lat3"], lon: UAV3_extra["lon3"] }, map);
 
-              $("#X").text(Math.round(data.x*1e4)/1e4);
-              $("#Y").text(Math.round(data.y*1e4)/1e4);
-              $("#Z").text(Math.round(data.z*1e4)/1e4);
+              $("#X").text(Math.round(data.lat*1e4)/1e4);
+              $("#Y").text(Math.round(data.lon*1e4)/1e4);
+              $("#Z").text(Math.round(data.alt*1e4)/1e4);
 
               if (data.state == -1){
                 $('#errorAlert_uav').text("GPS signal is lost!").show();

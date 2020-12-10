@@ -59,7 +59,7 @@ def gen(camera):
 def arm():
 	status = False
 	vehicle.arducopter_arm()
-	# vehicle.armed = True
+	vehicle.motors_armed_wait()
 	armed = vehicle.motors_armed()
 	if armed: status = True
 	return jsonify({'status' : status})
@@ -69,7 +69,7 @@ def arm():
 def disarm():
 	status = False
 	vehicle.arducopter_disarm()
-	# vehicle.armed = False
+	vehicle.motors_disarmed_wait()
 	armed = vehicle.motors_armed()
 	if (not armed): status = True
 	return jsonify({'status' : status})
@@ -145,9 +145,9 @@ def status():
 			'z' : myUAV['z'], \
 			'state' : state, 'time' : datetime.datetime.now()})
 	except:
-		return jsonify({'x' : myUAV['x'], \
-			'y' : myUAV['y'], \
-			'z' : myUAV['z'], \
+		return jsonify({'lat' : myUAV['x'], \
+			'lon' : myUAV['y'], \
+			'alt' : myUAV['z'], \
 			'state' : -1, 'time' : datetime.datetime.now()})
 
 @app.route('/manual_drive', methods=["GET"])
