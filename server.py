@@ -83,6 +83,7 @@ def get_gps():
 		x = random.uniform(59.974933, 59.974471)
 		y = random.uniform(30.297115, 30.299476)
 		z = random.uniform(15.0, 17.0)
+	print(request.values["UAVnum"])
 
 	UAV[i].pop(0)
 	UAV[i].append([x, y])
