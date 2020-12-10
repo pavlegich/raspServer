@@ -212,6 +212,16 @@
       markers.push(marker);
     }
 
+    function addExtra(label, location, map) {
+      const marker = new google.maps.Marker({
+        position: location,
+        map: map,
+        icon: "{{ url_for('static', filename='img/extra.png') }}",
+        label: label
+      });
+      markers.push(marker);
+    }
+
     function deleteMarkers() {
       for (let i = 0; i < markers.length; i++) {
         markers[i].setMap(null);
@@ -220,7 +230,7 @@
     }
 
     var statusIntervalId = window.setInterval(update, 2000);
-    
+
 
     function update() {
         $.ajax({
@@ -281,6 +291,7 @@
               addMarker("UAV", UAV, map);
               addMarker("UAV2", UAV2, map);
               addMarker("UAV3", UAV3, map);
+              addExtra("2", { lat: UAV2_extra["lat1"], lng: UAV2_extra["lng1"] }, map);
 
               $("#X").text(Math.round(data.x*1e4)/1e4);
               $("#Y").text(Math.round(data.y*1e4)/1e4);
