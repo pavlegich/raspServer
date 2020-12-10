@@ -32,15 +32,15 @@ def get_pw(username):
     return None
 
 endpoint = {
-	"x" : 0,
-	"y" : 0,
-	"z" : 0
+	"lat" : None,
+	"lon" : None,
+	"alt" : None
 }
 
 myUAV = {
-	'x' : 0,
-	'y' : 0,
-	'z' : 0
+	'lat' : 0,
+	'lon' : 0,
+	'alt' : 0
 }
 
 UAV = [[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]]]
@@ -53,6 +53,21 @@ def gen(camera):
 	while True:
 		frame = camera.get_frame()
 		yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+@app.route('/video_feed', methods=["GET"])
+@auth.login_required
+def video_feed():
+	return Response(gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/image', methods=["GET"])
+@auth.login_required
+def image():
+	return Response(gen_img(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/latest_image', methods=["GET"])
+@auth.login_required
+def latest_image():
+	return render_template("latest_image.html")
 
 @app.route('/arm', methods=["POST"])
 @auth.login_required
@@ -107,21 +122,6 @@ def get_gps():
 		'lat2' : lat_extra[1], 'lon2' : lon_extra[1], \
 		'lat3' : lat_extra[2], 'lon3' : lon_extra[2]})
 
-@app.route('/video_feed', methods=["GET"])
-@auth.login_required
-def video_feed():
-	return Response(gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
-
-@app.route('/image', methods=["GET"])
-@auth.login_required
-def image():
-	return Response(gen_img(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
-
-@app.route('/latest_image', methods=["GET"])
-@auth.login_required
-def latest_image():
-	return render_template("latest_image.html")
-
 @app.route('/status', methods=["GET"])
 @auth.login_required
 def status():
@@ -134,20 +134,17 @@ def status():
 		sv = vehicle.messages['GPS_RAW_INT'].satellites_visible
 		if (sv == 0):
 			state = -1
-		elif (sv<7 or (abs(lat-myUAV['x'])>0.000038 or abs(lon-myUAV['y'])>0.000078 \
-		 or abs(alt-myUAV['z'])>5)):
+		elif (sv<7 or (abs(lat-myUAV['lat'])>0.000038 or abs(lon-myUAV['lon'])>0.000078 \
+		 or abs(alt-myUAV['alt'])>5)):
 			state = 0
-		myUAV['x'] = lat
-		myUAV['y'] = lon
-		myUAV['z'] = alt
-		return jsonify({'x' : myUAV['x'], \
-			'y' : myUAV['y'], \
-			'z' : myUAV['z'], \
+		myUAV['lat'] = lat
+		myUAV['lon'] = lon
+		myUAV['alt'] = alt
+		return jsonify({'x' : lat, 'y' : lon, 'z' : alt, \
 			'state' : state, 'time' : datetime.datetime.now()})
 	except:
-		return jsonify({'lat' : myUAV['x'], \
-			'lon' : myUAV['y'], \
-			'alt' : myUAV['z'], \
+		return jsonify({'lat' : myUAV['lat'], 'lon' : myUAV['lon'], \
+			'alt' : myUAV['alt'], \
 			'state' : -1, 'time' : datetime.datetime.now()})
 
 @app.route('/manual_drive', methods=["GET"])
@@ -158,15 +155,15 @@ def manual_drive():
 @app.route('/getendpoint', methods=["GET"])
 @auth.login_required
 def getendpoint():
-    return jsonify({'x' : endpoint["x"], 'y' : endpoint["y"], 'z' : endpoint["z"]})
+    return jsonify({'lat' : endpoint["lat"], 'lon' : endpoint["lon"], 'alt' : endpoint["alt"]})
 
 @app.route('/setendpoint', methods=["GET", "POST"])
 @auth.login_required
 def setendpoint():
 	if request.method == "POST":
-		endpoint["x"] = request.values["setX"]
-		endpoint["y"] = request.values["setY"]
-		endpoint["z"] = request.values["setZ"]
+		endpoint["lat"] = request.values["setX"]
+		endpoint["lon"] = request.values["setY"]
+		endpoint["alt"] = request.values["setZ"]
 		return jsonify({'status' : 'OK'})
 	else:
 		return render_template("setendpoint.html")
@@ -179,20 +176,13 @@ def sensor():
 		return jsonify({'type' : stype, 'image' : 'http://' + ip_address + ':5000/latest_image', \
 		 'time' : round(time.time()) })
 	elif stype == 'gps':
-		return jsonify({'type' : stype, 'x' : round(random.uniform(59.0, 60.0), 4), \
-			'y' : round(random.uniform(30.0, 31.0), 4), \
-			'z' : round(random.uniform(1.0, 20.0), 2), 'time' : round(time.time())})
-
+		return jsonify({'type' : stype, 'lat' : myUAV['lat'], 'lon' : myUAV['lon'], \
+			'alt' : myUAV['alt'], 'time' : datetime.datetime.now()})
 
 @app.route('/game')
 @auth.login_required
 def game():
     return render_template("game.html")
-
-# @app.route('/logout', methods=['GET', 'POST'])
-# @auth.login_required
-# def logout():
-#     auth.username = None
 
 @app.route('/')
 @auth.login_required
