@@ -73,7 +73,7 @@ def disarm():
 @app.route('/get_gps', methods=["POST"])
 @auth.login_required
 def get_gps():
-	i = request.values["UAVnum"]
+	i = int(request.values["UAVnum"])
 	if i == 0:
 		x = random.uniform(59.973982, 59.973478)
 		y = random.uniform(30.298140, 30.300297)
