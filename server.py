@@ -2,8 +2,10 @@ from flask import Flask, render_template, redirect, url_for, request, session, f
 from flask_httpauth import HTTPDigestAuth
 from werkzeug.security import generate_password_hash, check_password_hash
 import time, datetime, random, threading
+import numpy as np
 from camera_pi import Camera
 from pymavlink import mavutil
+from scipy.interpolate import splrep, splev
 
 # faceCascade = cv2.CascadeClassifier('Cascades/haarcascade_frontalface_default.xml')
 
