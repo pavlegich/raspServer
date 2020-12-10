@@ -140,7 +140,7 @@ def status():
 		myUAV['lat'] = lat
 		myUAV['lon'] = lon
 		myUAV['alt'] = alt
-		return jsonify({'x' : lat, 'y' : lon, 'z' : alt, \
+		return jsonify({'lat' : lat, 'lon' : lon, 'alt' : alt, \
 			'state' : state, 'time' : datetime.datetime.now()})
 	except:
 		return jsonify({'lat' : myUAV['lat'], 'lon' : myUAV['lon'], \
