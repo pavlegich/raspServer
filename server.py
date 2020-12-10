@@ -95,10 +95,10 @@ def get_gps():
 	z = random.uniform(15.0, 17.0)
 	
 	if len(UAV2)<6:
-		UAV2.append([lat, lon])
+		UAV2.append([x, y])
 	else:
 		UAV2.pop(0)
-		UAV2.append([lat, lon])
+		UAV2.append([x, y])
 	
 	UAV2e = np.array(UAV2)
 	lat = np.array(UAV2e[:,0])
