@@ -111,7 +111,7 @@ def get_gps():
 	step = np.diff(lon[(j-5):(j+2)]).mean()
 	lon_extra = np.array([lon[j]+step,lon[j]+step*2,lon[j]+step*3])
 	spl = splrep(lon_sort[(j-5):(j+2):2], lat[(j-5):(j+2):2], k=1)
-	lat_extra = splev(x_extra, spl)
+	lat_extra = splev(lon_extra, spl)
 
 	return jsonify({'x' : x, 'y' : y, 'z' : z, \
 		'state' : 1, 'time' : datetime.datetime.now(), \
