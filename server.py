@@ -73,18 +73,16 @@ def disarm():
 @app.route('/get_gps', methods=["POST"])
 @auth.login_required
 def get_gps():
-	i = 0
-	if request.values["UAVnum"] == 2:
-		i = 0
+	i = request.values["UAVnum"]
+	if i == 0:
 		x = random.uniform(59.973982, 59.973478)
 		y = random.uniform(30.298140, 30.300297)
 		z = random.uniform(15.0, 17.0)
 	else:
-		i = 1
 		x = random.uniform(59.974933, 59.974471)
 		y = random.uniform(30.297115, 30.299476)
 		z = random.uniform(20.0, 30.0)
-
+	print(i)
 	UAV[i].pop(0)
 	UAV[i].append([x, y])
 	UAVe = np.array(UAV[i])
