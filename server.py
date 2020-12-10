@@ -14,8 +14,6 @@ ip_address = "192.168.1.103"
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hello'
 auth = HTTPDigestAuth()
-x1 = 60.03143
-y1 = 30.36020
 
 vehicle = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
 
@@ -37,30 +35,13 @@ endpoint = {
 	"z" : 0
 }
 
-UAV = {
+myUAV = {
 	'x' : 0,
 	'y' : 0,
 	'z' : 0
 }
 
-UAV2 = [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]]
-
-UAV3 = {
-	"x" : 60.03143,
-	"y" : 30.3613,
-	# "x2" : 60.03153,
-	# "y2" : 30.36151,
-	# "x3" : 60.0316,
-	# "y3" : 30.36172,
-	# "x4" : 60.03159,
-	# "y4" : 30.36191
-	"x1" : round(random.uniform(x1, x1+0.00002), 5),
-	"y1" : round(random.uniform(y1, y1+0.00002), 5),
-	"x2" : round(random.uniform(x1+0.00002, x1+0.00004), 5),
-	"y2" : round(random.uniform(y1+0.00004, y1+0.00006), 5),
-	"x3" : round(random.uniform(x1+0.00004, x1+0.00006), 5),
-	"y3" : round(random.uniform(y1+0.00006, y1+0.00008), 5)
-}
+UAV = [[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]]]
 
 def gen_img(camera):
 	frame = camera.get_frame()
@@ -89,21 +70,28 @@ def disarm():
 	if (not armed): status = True
 	return jsonify({'status' : status})
 
-@app.route('/get_gps', methods=["GET"])
+@app.route('/get_gps', methods=["POST"])
 @auth.login_required
 def get_gps():
-	x = random.uniform(59.973982, 59.973478)
-	y = random.uniform(30.298140, 30.300297)
-	z = random.uniform(15.0, 17.0)
+	if request.values["UAVnum"] == 2:
+		i = 0
+		x = random.uniform(59.973982, 59.973478)
+		y = random.uniform(30.298140, 30.300297)
+		z = random.uniform(15.0, 17.0)
+	else:
+		i = 1
+		x = random.uniform(59.974933, 59.974471)
+		y = random.uniform(30.297115, 30.299476)
+		z = random.uniform(15.0, 17.0)
 
-	UAV2.pop(0)
-	UAV2.append([x, y])
-	UAV2e = np.array(UAV2)
+	UAV[i].pop(0)
+	UAV[i].append([x, y])
+	UAVe = np.array(UAV[i])
 
-	lat = np.array(UAV2e[:,0])
-	lon = np.array(UAV2e[:,1])
+	j = len(UAVe) - 1
+	lat = np.array(UAVe[:,0])
+	lon = np.array(UAVe[:,1])
 	lon_sort = np.sort(lon)
-	j = len(UAV2e) - 1
 
 	step = np.diff(lon[(j-5):(j+2)]).mean()
 	lon_extra = np.array([lon[j]+step,lon[j]+step*2,lon[j]+step*3])
@@ -115,15 +103,6 @@ def get_gps():
 		'lat1' : lat_extra[0], 'lon1' : lon_extra[0], \
 		'lat2' : lat_extra[1], 'lon2' : lon_extra[1], \
 		'lat3' : lat_extra[2], 'lon3' : lon_extra[2]})
-
-@app.route('/get_gps3', methods=["GET"])
-@auth.login_required
-def get_gps3():
-	return jsonify({'x' : random.uniform(59.974933, 59.974471), \
-			'y' : random.uniform(30.297115, 30.299476), \
-			'z' : round(random.uniform(15.0, 17.0), 2), \
-			'state' : 1, 'time' : datetime.datetime.now()})
-
 
 @app.route('/video_feed', methods=["GET"])
 @auth.login_required
@@ -152,20 +131,20 @@ def status():
 		sv = vehicle.messages['GPS_RAW_INT'].satellites_visible
 		if (sv == 0):
 			state = -1
-		elif (sv<7 or (abs(lat-UAV['x'])>0.000038 or abs(lon-UAV['y'])>0.000078 \
-		 or abs(alt-UAV['z'])>5)):
+		elif (sv<7 or (abs(lat-myUAV['x'])>0.000038 or abs(lon-myUAV['y'])>0.000078 \
+		 or abs(alt-myUAV['z'])>5)):
 			state = 0
-		UAV['x'] = lat
-		UAV['y'] = lon
-		UAV['z'] = alt
-		return jsonify({'x' : UAV['x'], \
-			'y' : UAV['y'], \
-			'z' : UAV['z'], \
+		myUAV['x'] = lat
+		myUAV['y'] = lon
+		myUAV['z'] = alt
+		return jsonify({'x' : myUAV['x'], \
+			'y' : myUAV['y'], \
+			'z' : myUAV['z'], \
 			'state' : state, 'time' : datetime.datetime.now()})
 	except:
-		return jsonify({'x' : UAV['x'], \
-			'y' : UAV['y'], \
-			'z' : UAV['z'], \
+		return jsonify({'x' : myUAV['x'], \
+			'y' : myUAV['y'], \
+			'z' : myUAV['z'], \
 			'state' : -1, 'time' : datetime.datetime.now()})
 
 @app.route('/manual_drive', methods=["GET"])

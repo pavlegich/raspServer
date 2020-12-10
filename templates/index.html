@@ -100,7 +100,7 @@
             </div>
 
             <div id="UAV3" class="tabcontent">
-              <table class="xyz_violet">
+              <table class="xyz_green">
                 <tr>
                   <td>Latitide</td>
                   <td>Longitide</td>
@@ -173,6 +173,7 @@
     var UAV2 = { lat: 0, lng: 0 };
     var UAV2_extra = { lat1: 0, lng1: 0, lat2: 0, lng2: 0, lat3: 0, lng3: 0 };
     var UAV3 = { lat: 0, lng: 0 };
+    var UAV3_extra = { lat1: 0, lng1: 0, lat2: 0, lng2: 0, lat3: 0, lng3: 0 };
 
     let map;
     let markers = [];
@@ -201,16 +202,15 @@
       markers = [];
     }
 
-
-    // gid("UAV2").innerText = "UAV2 predict: \n(" + {{UAV2["x1"]}} + ", " + {{UAV2["y1"]}} + "), (" + {{UAV2["x2"]}} + ", " + {{UAV2["y2"]}} + "), \n(" + {{UAV2["x3"]}} + ", " + {{UAV2["y3"]}} + ")";
-    // gid("UAV3").innerText = "UAV3 predict: \n(" + {{UAV3["x1"]}} + ", " + {{UAV3["y1"]}} + "), (" + {{UAV3["x2"]}} + ", " + {{UAV3["y2"]}} + "), \n(" + {{UAV3["x3"]}} + ", " + {{UAV3["y3"]}} + ")";
-
     var statusIntervalId = window.setInterval(update, 2000);
 
     function update() {
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: '/get_gps',
+            data: {
+              UAVnum : 2,
+            },
             dataType: 'json',
             success: function(data) {
                 $("#X2").text(Math.round(data.x*1e4)/1e4);
@@ -226,20 +226,30 @@
                 $("#Y2_extra2").text(Math.round(UAV2_extra["lng2"]*1e4)/1e4);
                 $("#X2_extra3").text(Math.round(UAV2_extra["lat3"]*1e4)/1e4);
                 $("#Y2_extra3").text(Math.round(UAV2_extra["lng3"]*1e4)/1e4);
-
             }
         })
 
         $.ajax({
-            type: "GET",
-            url: '/get_gps3',
+            type: "POST",
+            url: '/get_gps',
+            data: {
+              UAVnum : 3,
+            },
             dataType: 'json',
             success: function(data) {
                 $("#X3").text(Math.round(data.x*1e4)/1e4);
                 $("#Y3").text(Math.round(data.y*1e4)/1e4);
-                $("#Z3").text(data.z);
+                $("#Z3").text(Math.round(data.z*1e2)/1e2);
 
                 UAV3 = { lat: data.x, lng: data.y };
+                UAV3_extra = { lat1: data.lat1, lng1: data.lon1, lat2: data.lat2, lng2: data.lon2, lat3: data.lat3, lng3: data.lon3 };
+
+                $("#X3_extra1").text(Math.round(UAV3_extra["lat1"]*1e4)/1e4);
+                $("#Y3_extra1").text(Math.round(UAV3_extra["lng1"]*1e4)/1e4);
+                $("#X3_extra2").text(Math.round(UAV3_extra["lat2"]*1e4)/1e4);
+                $("#Y3_extra2").text(Math.round(UAV3_extra["lng2"]*1e4)/1e4);
+                $("#X3_extra3").text(Math.round(UAV3_extra["lat3"]*1e4)/1e4);
+                $("#Y3_extra3").text(Math.round(UAV3_extra["lng3"]*1e4)/1e4);
             }
         })
 
