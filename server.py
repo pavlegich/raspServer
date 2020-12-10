@@ -194,7 +194,7 @@ def game():
 @app.route('/')
 @auth.login_required
 def index():
-    return render_template("index.html", UAV2 = UAV2, UAV3 = UAV3)
+    return render_template("index.html")
 
 if __name__ == "__main__":
 	app.run(debug=True, host='0.0.0.0', threaded=True)
