@@ -9,10 +9,11 @@ from scipy.interpolate import splrep, splev
 
 # faceCascade = cv2.CascadeClassifier('Cascades/haarcascade_frontalface_default.xml')
 
-# ip_address = "192.168.43.210"
 ip_address = "192.168.1.103"
-ip2 = "/status"
-ip3 = "/status"
+
+# ip = ['192.168.43.210','192.168.43.210']
+# login = [['admin','admin'],['admin','admin']]
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hello'
 auth = HTTPDigestAuth()
@@ -101,6 +102,15 @@ def get_gps():
 		x = random.uniform(59.974933, 59.974471)
 		y = random.uniform(30.297115, 30.299476)
 		z = random.uniform(20.0, 30.0)
+
+	# url = 'http://' + ip[i] + ':5000/status'
+	# auth = HTTPDigestAuth(login[i][0], login[i][1])
+	# r = requests.get(url = url, auth = auth)
+	# data = r.json()
+
+	# x = data['lat']
+	# y = data['lon']
+	# z = data['alt']
 
 	UAV[i].pop(0)
 	UAV[i].append([x, y])
