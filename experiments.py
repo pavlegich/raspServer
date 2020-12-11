@@ -6,7 +6,10 @@ aTargetAltitude = 1
 vehicle = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
 print("Arming motors")
 vehicle.arducopter_arm()
-vehicle.motors_armed_wait()
+# vehicle.motors_armed_wait()
+while vehicle.motors_armed():
+	time.sleep(1)
+print("Motors armed!")
 print("Taking off!")
 vehicle.simple_takeoff(aTargetAltitude)
 time.sleep(10)
