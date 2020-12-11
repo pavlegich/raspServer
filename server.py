@@ -75,7 +75,7 @@ def latest_image():
 def arm():
 	status = False
 	vehicle.arducopter_arm()
-	vehicle.motors_armed_wait()
+	# vehicle.motors_armed_wait()
 	armed = vehicle.motors_armed()
 	if armed: status = True
 	return jsonify({'status' : status})
@@ -85,7 +85,7 @@ def arm():
 def disarm():
 	status = False
 	vehicle.arducopter_disarm()
-	vehicle.motors_disarmed_wait()
+	# vehicle.motors_disarmed_wait()
 	armed = vehicle.motors_armed()
 	if (not armed): status = True
 	return jsonify({'status' : status})
