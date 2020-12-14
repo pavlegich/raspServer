@@ -109,12 +109,16 @@ def get_gps():
 	# r = requests.get(url = url, auth = auth)
 	# data = r.json()
 
-	r = requests.get(url = url)
-	data = r.json()
-
-	x = data['lat']
-	y = data['lon']
-	z = data['alt']
+	try:
+		r = requests.get(url = url)
+		data = r.json()
+		x = data['lat']
+		y = data['lon']
+		z = data['alt']
+	except:
+		x = random.uniform(59.973982, 59.973478)
+		y = random.uniform(30.298140, 30.300297)
+		z = random.uniform(15.0, 17.0)
 
 	UAV[i].pop(0)
 	UAV[i].append([x, y])
