@@ -111,9 +111,9 @@ def get_gps():
 	r = requests.get(url = url)
 	data = r.json()
 
-	# x = data['lat']
-	# y = data['lon']
-	# z = data['alt']
+	x = data['lat']
+	y = data['lon']
+	z = data['alt']
 
 	UAV[i].pop(0)
 	UAV[i].append([x, y])
