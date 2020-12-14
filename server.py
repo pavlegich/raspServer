@@ -114,7 +114,7 @@ def get_gps():
 	data = r.json()
 	x = data['lat']
 	y = data['lon']
-	z = data['alt']
+	# z = data['alt']
 
 	UAV[i].pop(0)
 	UAV[i].append([x, y])
@@ -130,7 +130,13 @@ def get_gps():
 	spl = splrep(lon_sort[(j-5):(j+2):2], lat[(j-5):(j+2):2], k=1)
 	lat_extra = splev(lon_extra, spl)
 
-	return jsonify({'x' : x, 'y' : y, 'z' : z, \
+	# return jsonify({'x' : x, 'y' : y, 'z' : z, \
+	# 	'state' : 1, 'time' : datetime.datetime.now(), \
+	# 	'lat1' : lat_extra[0], 'lon1' : lon_extra[0], \
+	# 	'lat2' : lat_extra[1], 'lon2' : lon_extra[1], \
+	# 	'lat3' : lat_extra[2], 'lon3' : lon_extra[2]})
+
+	return jsonify({'x' : x, 'y' : y, \
 		'state' : 1, 'time' : datetime.datetime.now(), \
 		'lat1' : lat_extra[0], 'lon1' : lon_extra[0], \
 		'lat2' : lat_extra[1], 'lon2' : lon_extra[1], \
