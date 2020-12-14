@@ -9,7 +9,7 @@ print("Arming motors")
 vehicle.mav.command_long_send(
 	vehicle.target_system,  # target_system
 	vehicle.target_component,
-	mavlink.MAV_CMD_COMPONENT_ARM_DISARM, # command
+	mavutil.mavlink.MAV_CMD_COMPONENT_ARM_DISARM, # command
 	0, # confirmation
 	1, # param1 (1 to indicate arm)
 	0, # param2 (all other params meaningless)
