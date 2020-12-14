@@ -19,9 +19,9 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hello'
 auth = HTTPDigestAuth()
 
-vehicle = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
+# vehicle = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
 
-# vehicle = mavutil.mavlink_connection('udpin:0.0.0.0:14550')
+vehicle = mavutil.mavlink_connection('udpin:0.0.0.0:14550')
 
 users = {
     "admin": "admin"
