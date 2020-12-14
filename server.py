@@ -6,6 +6,7 @@ import numpy as np
 from camera_pi import Camera
 from pymavlink import mavutil
 from scipy.interpolate import splrep, splev
+import requests
 
 # faceCascade = cv2.CascadeClassifier('Cascades/haarcascade_frontalface_default.xml')
 
