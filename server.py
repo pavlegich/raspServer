@@ -104,7 +104,7 @@ def get_gps():
 	# 	z = random.uniform(20.0, 30.0)
 
 	url = 'http://' + ip[i] + ':5000/status'
-	auth = HTTPDigestAuth(login[i][0], login[i][1])
+	# auth = HTTPDigestAuth(login[i][0], login[i][1])
 	# r = requests.get(url = url, auth = auth)
 	# data = r.json()
 
