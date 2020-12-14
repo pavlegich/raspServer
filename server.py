@@ -118,6 +118,7 @@ def get_gps():
 	x = data['lat']
 	y = data['lon']
 	# z = data['alt']
+	print(x,y)
 
 	UAV[i].pop(0)
 	UAV[i].append([x, y])
