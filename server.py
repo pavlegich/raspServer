@@ -100,25 +100,20 @@ def disarm():
 @auth.login_required
 def get_gps():
 	i = int(request.values["UAVnum"])
-	# if i == 0:
-	# 	x = random.uniform(59.973982, 59.973478)
-	# 	y = random.uniform(30.298140, 30.300297)
-	# 	z = random.uniform(15.0, 17.0)
-	# else:
-	# 	x = random.uniform(59.974933, 59.974471)
-	# 	y = random.uniform(30.297115, 30.299476)
-	# 	z = random.uniform(20.0, 30.0)
+	if i == 0:
+		x = random.uniform(59.973982, 59.973478)
+		y = random.uniform(30.298140, 30.300297)
+	else:
+		x = random.uniform(59.974933, 59.974471)
+		y = random.uniform(30.297115, 30.299476)
 
 	url = 'http://' + ip[i] + ':5000/status'
-	# auth = HTTPDigestAuth(login[i][0], login[i][1])
-	# r = requests.get(url = url, auth = auth)
-	# data = r.json()
+
 	r = requests.get(url = url)
 	data = r.json()
 	x = data['lat']
 	y = data['lon']
-	# z = data['alt']
-	print(x,y)
+	z = 0
 
 	UAV[i].pop(0)
 	UAV[i].append([x, y])
@@ -134,13 +129,7 @@ def get_gps():
 	spl = splrep(lon_sort[(j-5):(j+2):2], lat[(j-5):(j+2):2], k=1)
 	lat_extra = splev(lon_extra, spl)
 
-	# return jsonify({'x' : x, 'y' : y, 'z' : z, \
-	# 	'state' : 1, 'time' : datetime.datetime.now(), \
-	# 	'lat1' : lat_extra[0], 'lon1' : lon_extra[0], \
-	# 	'lat2' : lat_extra[1], 'lon2' : lon_extra[1], \
-	# 	'lat3' : lat_extra[2], 'lon3' : lon_extra[2]})
-
-	return jsonify({'x' : x, 'y' : y, \
+	return jsonify({'x' : x, 'y' : y, 'z' : z, \
 		'state' : 1, 'time' : datetime.datetime.now(), \
 		'lat1' : lat_extra[0], 'lon1' : lon_extra[0], \
 		'lat2' : lat_extra[1], 'lon2' : lon_extra[1], \
