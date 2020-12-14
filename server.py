@@ -11,7 +11,7 @@ from scipy.interpolate import splrep, splev
 
 ip_address = "192.168.43.7"
 
-# ip = ['192.168.43.112','192.168.43.132']
+ip = ['192.168.43.112','192.168.43.132']
 # login = [['admin','admin'],['admin','admin']]
 
 app = Flask(__name__)
@@ -94,19 +94,22 @@ def disarm():
 @auth.login_required
 def get_gps():
 	i = int(request.values["UAVnum"])
-	if i == 0:
-		x = random.uniform(59.973982, 59.973478)
-		y = random.uniform(30.298140, 30.300297)
-		z = random.uniform(15.0, 17.0)
-	else:
-		x = random.uniform(59.974933, 59.974471)
-		y = random.uniform(30.297115, 30.299476)
-		z = random.uniform(20.0, 30.0)
+	# if i == 0:
+	# 	x = random.uniform(59.973982, 59.973478)
+	# 	y = random.uniform(30.298140, 30.300297)
+	# 	z = random.uniform(15.0, 17.0)
+	# else:
+	# 	x = random.uniform(59.974933, 59.974471)
+	# 	y = random.uniform(30.297115, 30.299476)
+	# 	z = random.uniform(20.0, 30.0)
 
-	# url = 'http://' + ip[i] + ':5000/status'
-	# auth = HTTPDigestAuth(login[i][0], login[i][1])
+	url = 'http://' + ip[i] + ':5000/status'
+	auth = HTTPDigestAuth(login[i][0], login[i][1])
 	# r = requests.get(url = url, auth = auth)
 	# data = r.json()
+
+	r = requests.get(url = url)
+	data = r.json()
 
 	# x = data['lat']
 	# y = data['lon']
