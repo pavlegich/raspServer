@@ -9,9 +9,9 @@ from scipy.interpolate import splrep, splev
 
 # faceCascade = cv2.CascadeClassifier('Cascades/haarcascade_frontalface_default.xml')
 
-ip_address = "192.168.1.103"
+ip_address = "192.168.43.7"
 
-# ip = ['192.168.43.210','192.168.43.210']
+# ip = ['192.168.43.112','192.168.43.132']
 # login = [['admin','admin'],['admin','admin']]
 
 app = Flask(__name__)
@@ -133,7 +133,7 @@ def get_gps():
 		'lat3' : lat_extra[2], 'lon3' : lon_extra[2]})
 
 @app.route('/status', methods=["GET"])
-@auth.login_required
+# @auth.login_required
 def status():
 	try:
 		state = 1
