@@ -10,7 +10,9 @@ vehicle.arducopter_arm()
 while vehicle.motors_armed():
 	time.sleep(1)
 print("Motors armed!")
+time.sleep(10)
 
+vehicle.arducopter_disarm()
 # print("Taking off!")
 # vehicle.simple_takeoff(aTargetAltitude)
 # time.sleep(10)
