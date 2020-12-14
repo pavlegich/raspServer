@@ -7,6 +7,7 @@ from camera_pi import Camera
 from pymavlink import mavutil
 from scipy.interpolate import splrep, splev
 import requests
+from flask_cors import CORS, cross_origin
 
 # faceCascade = cv2.CascadeClassifier('Cascades/haarcascade_frontalface_default.xml')
 
@@ -20,6 +21,8 @@ ip = ['192.168.43.112','192.168.43.132']
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hello'
 auth = HTTPDigestAuth()
+
+CORS(app, support_credentials=True)
 
 # vehicle = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
 
@@ -144,6 +147,7 @@ def get_gps():
 
 @app.route('/status', methods=["GET"])
 # @auth.login_required
+@cross_origin(support_credentials=True)
 def status():
 	try:
 		state = 1
