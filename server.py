@@ -103,17 +103,19 @@ def get_gps():
 	if i == 0:
 		x = random.uniform(59.973982, 59.973478)
 		y = random.uniform(30.298140, 30.300297)
+		z = random.uniform(10.0, 12.0)
 	else:
 		x = random.uniform(59.974933, 59.974471)
 		y = random.uniform(30.297115, 30.299476)
+		z = random.uniform(10.0, 12.0)
 
-	url = 'http://' + ip[i] + ':5000/status'
+	# url = 'http://' + ip[i] + ':5000/status'
 
-	r = requests.get(url = url)
-	data = r.json()
-	x = data['lat']
-	y = data['lon']
-	z = 0
+	# r = requests.get(url = url)
+	# data = r.json()
+	# x = data['lat']
+	# y = data['lon']
+	# z = 0
 
 	UAV[i].pop(0)
 	UAV[i].append([x, y])
