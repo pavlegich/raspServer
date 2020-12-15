@@ -403,6 +403,26 @@
       });
     })
 
+    $("#up").click(function(){
+      $.ajax({
+        method: "POST",
+        url: "/takeoff"
+      })
+      .done(function(data){
+        
+      });
+    })
+
+    $("#down").click(function(){
+      $.ajax({
+        method: "POST",
+        url: "/land"
+      })
+      .done(function(data){
+        
+      });
+    })
+
     gid('UAV').style.display = "block";
 
     function openPage(evt, name) {
