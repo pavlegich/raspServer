@@ -5,14 +5,15 @@ from MAVProxy.modules.lib import mp_module
 
 vehicle = mavutil.mavlink_connection('udpin:localhost:14550')
 
-while True:
-	vehicle.wait_heartbeat()
-	lat = vehicle.messages["GPS_RAW_INT"].lat*1e-7
-	lon = vehicle.messages["GPS_RAW_INT"].lon*1e-7
-	alt = vehicle.messages["GPS_RAW_INT"].alt*1e-3
-	sv = vehicle.messages['GPS_RAW_INT'].satellites_visible
-	print(lat,lon,alt,sv)
-	time.sleep(2)
+vehicle.arducopter_arm()
+
+print(vehicle.motors_armed())
+
+time.sleep(5)
+
+vehicle.arducopter_disarm()
+
+print(vehicle.motors_armed())
 
 # altitude = 3
 
