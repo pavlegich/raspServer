@@ -12,6 +12,7 @@ while True:
 	alt = vehicle.messages["GPS_RAW_INT"].alt*1e-3
 	sv = vehicle.messages['GPS_RAW_INT'].satellites_visible
 	print(lat,lon,alt,sv)
+	time.sleep(2)
 
 # altitude = 3
 
