@@ -5,10 +5,17 @@ from MAVProxy.modules.lib import mp_module
 
 vehicle = mavutil.mavlink_connection('udpin:localhost:14550')
 
+print("Connect")
+
+time.sleep(3)
+
+print("Arm")
+
 vehicle.arducopter_arm()
 
 print(vehicle.motors_armed())
 
+print("Sleep")
 time.sleep(5)
 
 vehicle.arducopter_disarm()
