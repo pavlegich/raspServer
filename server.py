@@ -13,7 +13,7 @@ from flask_cors import CORS, cross_origin
 
 # mavproxy.py --master=/dev/ttyACM0,230400 --out=udpout:0.0.0.0:14550
 
-altitude = 0.5
+altitude = 1
 
 ip_address = "192.168.43.7"
 
@@ -103,7 +103,7 @@ def disarm():
 def takeoff():
 	vehicle.mav.command_long_send(
 		vehicle.target_system,  # target_system
-		mavutil.mavlink.MAV_COMP_ID_SYSTEM_CONTROL, # target_component
+		vehicle.target_component, # target_component
 		mavutil.mavlink.MAV_CMD_NAV_TAKEOFF, # command
 		0,0,0,0,0,0,0,altitude)
 	return jsonify({'status' : 1})
@@ -113,8 +113,8 @@ def takeoff():
 def land():
 	vehicle.mav.command_long_send(
 		vehicle.target_system,  # target_system
-		mavutil.mavlink.MAV_COMP_ID_SYSTEM_CONTROL, # target_component
-		mavutil.mavlink.MAV_CMD_NAV_LAND, # command
+		vehicle.target_component, # target_component
+		mavutil.mavlink.MAV_CMD_DO_LAND_START, # command
 		0,0,0,0,0,0,0,0)
 	return jsonify({'status' : 1})
 
