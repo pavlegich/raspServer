@@ -31,7 +31,8 @@
             <p><input type="button" value="Arm" id="arm" />
             <input type="button" value="Disarm" id="disarm" />
             <input type="button" value="Up" id="up" />
-            <input type="button" value="Down" id="down" /></p>
+            <input type="button" value="Down" id="down" />
+            <input type="button" value="Hold" id="hold" /></p>
             <div id="successAlert_arm" class="alert alert-success" role="alert" style="display: none; width: 100%; text-align: center;"></div>
             <div id="errorAlert_arm" class="alert alert-danger" role="alert" style="display: none; width: 100%; text-align: center;"></div>
           </div>
@@ -409,7 +410,22 @@
         url: "/takeoff"
       })
       .done(function(data){
-        
+        if (data.status == true){
+          $('#successAlert_arm').text("Takeoff detected!").show();
+          $('#errorAlert_arm').hide();
+          $(this).delay(5000).queue(function() {
+            $('#successAlert_arm').hide();
+            $(this).dequeue();
+          });
+        }
+        else{
+          $('#errorAlert_arm').text("Takeoff error!").show();
+          $('#successAlert_arm').hide();
+          $(this).delay(5000).queue(function() {
+            $('#errorAlert_arm').hide();
+            $(this).dequeue();
+          });
+        }
       });
     })
 
@@ -419,7 +435,47 @@
         url: "/land"
       })
       .done(function(data){
-        
+        if (data.status == true){
+          $('#successAlert_arm').text("Land detected!").show();
+          $('#errorAlert_arm').hide();
+          $(this).delay(5000).queue(function() {
+            $('#successAlert_arm').hide();
+            $(this).dequeue();
+          });
+        }
+        else{
+          $('#errorAlert_arm').text("Land error!").show();
+          $('#successAlert_arm').hide();
+          $(this).delay(5000).queue(function() {
+            $('#errorAlert_arm').hide();
+            $(this).dequeue();
+          });
+        }
+      });
+    })
+
+    $("#hold").click(function(){
+      $.ajax({
+        method: "POST",
+        url: "/hold"
+      })
+      .done(function(data){
+        if (data.status == true){
+          $('#successAlert_arm').text("Hold!").show();
+          $('#errorAlert_arm').hide();
+          $(this).delay(5000).queue(function() {
+            $('#successAlert_arm').hide();
+            $(this).dequeue();
+          });
+        }
+        else{
+          $('#errorAlert_arm').text("Hold error!").show();
+          $('#successAlert_arm').hide();
+          $(this).delay(5000).queue(function() {
+            $('#errorAlert_arm').hide();
+            $(this).dequeue();
+          });
+        }
       });
     })
 

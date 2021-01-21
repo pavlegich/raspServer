@@ -120,6 +120,17 @@ def land():
 		0,0,0,0,0,0,0,0)
 	return jsonify({'status' : 1})
 
+@app.route('/hold', methods=["POST"])
+@auth.login_required
+def hold():
+	vehicle.mav.command_long_send(
+		vehicle.target_system,  # target_system
+		vehicle.target_component, # target_component
+		mavutil.mavlink.MAV_CMD_NAV_LOITER_UNLIM, # command
+		0,0,0,0,0,0,0,0)
+	return jsonify({'status' : 1})
+
+
 
 @app.route('/get_gps', methods=["POST"])
 @auth.login_required
