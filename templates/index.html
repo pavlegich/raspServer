@@ -313,7 +313,7 @@
                   $('#warningAlert_uav').hide();
                   gps_err += 1;
                 }
-                else if (gps_err < 9) {
+                else if (gps_err < 12) {
                   $('#errorAlert_uav').text("Prepare Landing!").show();
                   $('#warningAlert_uav').hide();
                   $.post("/hand");
