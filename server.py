@@ -99,15 +99,15 @@ def disarm():
 @app.route('/takeoff', methods=["POST"])
 @auth.login_required
 def takeoff():
-	# vehicle.wait_heartbeat()
-	# lat0 = vehicle.messages["GPS_RAW_INT"].lat*1e-7
-	# lon0 = vehicle.messages["GPS_RAW_INT"].lon*1e-7
+	vehicle.wait_heartbeat()
+	lat0 = vehicle.messages["GPS_RAW_INT"].lat*1e-7
+	lon0 = vehicle.messages["GPS_RAW_INT"].lon*1e-7
 	altitude = 1
 	vehicle.mav.command_long_send(
 		vehicle.target_system,  # target_system
 		vehicle.target_component, # target_component
 		mavutil.mavlink.MAV_CMD_NAV_TAKEOFF, # command
-		0,0,0,0,0,0,0,altitude)
+		0,0,0,0,0,lat0,lon0,altitude)
 	return jsonify({'status' : 1})
 
 @app.route('/land', methods=["POST"])
@@ -129,8 +129,6 @@ def hold():
 		mavutil.mavlink.MAV_CMD_NAV_LOITER_UNLIM, # command
 		0,0,0,0,0,0,0,0)
 	return jsonify({'status' : 1})
-
-
 
 @app.route('/get_gps', methods=["POST"])
 @auth.login_required
