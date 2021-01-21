@@ -193,6 +193,9 @@
     var UAV3 = { lat: 0, lng: 0 };
     var UAV3_extra = { lat1: 0, lon1: 0, lat2: 0, lon2: 0, lat3: 0, lon3: 0 };
 
+    let gps_err = 0
+    let gps_ale = 0
+
     let map;
     let markers = [];
 
@@ -230,7 +233,7 @@
       markers = [];
     }
 
-    var statusIntervalId = window.setInterval(update, 2000);
+    var statusIntervalId = window.setInterval(update, 1000);
 
 
     function update() {
@@ -303,15 +306,41 @@
               $("#Y").text(Math.round(data.lon*1e4)/1e4);
               $("#Z").text(Math.round(data.alt*1e4)/1e4);
 
-              if (data.state == -1){
-                $('#errorAlert_uav').text("GPS signal is lost!").show();
-                $('#warningAlert_uav').hide();
+              if (data.state == -1) {
+                gps_ale = 0;
+                if (gps_err < 5){
+                  $('#errorAlert_uav').text("GPS signal is lost!").show();
+                  $('#warningAlert_uav').hide();
+                  gps_err += 1;
+                }
+                else if (gps_err < 9) {
+                  $('#errorAlert_uav').text("Prepare Landing!").show();
+                  $('#warningAlert_uav').hide();
+                  $.post("/hand");
+                  gps_err += 1;
+                }
+                else {
+                  $('#errorAlert_uav').text("Landing!").show();
+                  $('#warningAlert_uav').hide();
+                  gps_err = 0;
+                  $.post("/land");
+                }
               }
               else if (data.state == 0) {
-                $('#errorAlert_uav').hide();
-                $('#warningAlert_uav').text("GPS signal is unstable!").show();
+                gps_err = 0;
+                if (gps_ale < 5){
+                  $('#errorAlert_uav').hide();
+                  $('#warningAlert_uav').text("GPS signal is unstable!").show();
+                  gps_err += 1;
+                }
+                else {
+                  $('#errorAlert_uav').hide();
+                  $('#warningAlert_uav').text("GPS signal is unstable! Manual control recommended!").show();
+                }
               }
               else {
+                gps_err = 0;
+                gps_ale = 0;
                 $('#warningAlert_uav').hide();
                 $('#errorAlert_uav').hide();
               }
