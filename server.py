@@ -189,14 +189,14 @@ def status():
 @app.route('/manual_drive', methods=["GET"])
 @auth.login_required
 def manual_drive():
-    return jsonify({'up' : True, 'down' : False})
+    return jsonify({'up' : False, 'down' : False})
 
 @app.route('/getendpoint', methods=["GET"])
 @auth.login_required
 def getendpoint():
     return jsonify({'lat' : endpoint["lat"], 'lon' : endpoint["lon"], 'alt' : endpoint["alt"]})
 
-@app.route('/setendpoint', methods=["GET", "POST"])
+@app.route('/setendpoint', methods=["POST"])
 @auth.login_required
 def setendpoint():
 	if request.method == "POST":
@@ -204,8 +204,6 @@ def setendpoint():
 		endpoint["lon"] = request.values["setY"]
 		endpoint["alt"] = request.values["setZ"]
 		return jsonify({'status' : 'OK'})
-	else:
-		return render_template("setendpoint.html")
 
 @app.route('/sensor', methods=["GET"])
 @auth.login_required
