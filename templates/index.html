@@ -308,6 +308,7 @@
 
               if (data.state == -1) {
                 gps_ale = 0;
+                gps_err = 0;
                 if (gps_err < 5){
                   $('#errorAlert_uav').text("GPS signal is lost!").show();
                   $('#warningAlert_uav').hide();
@@ -322,8 +323,12 @@
                 else {
                   $('#errorAlert_uav').text("Landing!").show();
                   $('#warningAlert_uav').hide();
-                  gps_err = 0;
                   $.post("/land");
+                  if (gps_err > 30)
+                  {
+                     $('#errorAlert_uav').text("GPS signal is lost!").show();
+                     $('#warningAlert_uav').hide();
+                  }
                 }
               }
               else if (data.state == 0) {
