@@ -20,6 +20,7 @@ ip = ['172.20.10.5:5000','172.20.10.7:5000']
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hello'
+
 auth = HTTPDigestAuth()
 
 CORS(app, support_credentials=True)
