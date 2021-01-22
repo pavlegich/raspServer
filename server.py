@@ -13,9 +13,9 @@ from flask_cors import CORS, cross_origin
 
 # mavproxy.py --master=/dev/ttyACM0,230400 --out=udpout:0.0.0.0:14550
 
-ip_address = "192.168.43.7"
+ip_address = "172.20.10.3"
 
-ip = ['192.168.43.112','192.168.43.132']
+ip = ['172.20.10.5:5000','172.20.10.7:5000']
 # login = [['admin','admin'],['admin','admin']]
 
 app = Flask(__name__)
