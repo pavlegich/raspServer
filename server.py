@@ -184,7 +184,7 @@ def status():
 		alt = vehicle.messages["GPS_RAW_INT"].alt*1e-3
 		sv = vehicle.messages['GPS_RAW_INT'].satellites_visible
 		if (sv == 0):
-			state = -1
+			state = 0
 		elif (sv<7 or (abs(lat-myUAV['lat'])>0.000038 or abs(lon-myUAV['lon'])>0.000078 \
 		 or abs(alt-myUAV['alt'])>5)):
 			state = 0
