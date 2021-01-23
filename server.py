@@ -15,7 +15,7 @@ from flask_cors import CORS, cross_origin
 
 ip_address = "192.168.43.7"
 
-ip = ['192.168.43.112:5000','192.168.43.132:5000']
+ip = ['192.168.43.112','192.168.43.132']
 # login = [['admin','admin'],['admin','admin']]
 
 app = Flask(__name__)
