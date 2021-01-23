@@ -184,7 +184,7 @@ def status():
 		alt = vehicle.messages["GPS_RAW_INT"].alt*1e-3
 		sv = vehicle.messages['GPS_RAW_INT'].satellites_visible
 		if (sv == 0):
-			state = 0
+			state = 0 # -1
 		elif (sv<7 or (abs(lat-myUAV['lat'])>0.000038 or abs(lon-myUAV['lon'])>0.000078 \
 		 or abs(alt-myUAV['alt'])>5)):
 			state = 0
@@ -196,7 +196,7 @@ def status():
 	except:
 		return jsonify({'lat' : myUAV['lat'], 'lon' : myUAV['lon'], \
 			'alt' : myUAV['alt'], \
-			'state' : -1, 'time' : datetime.datetime.now()})
+			'state' : 0, 'time' : datetime.datetime.now()})
 
 @app.route('/manual_drive', methods=["GET"])
 @auth.login_required
